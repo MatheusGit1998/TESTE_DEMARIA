@@ -22,7 +22,7 @@ namespace TESTE_DEMARIA.CLASSES.Utils
 
     }
 
-    public class Cliente
+    public class Clientes
     {
         public int ClienteId { get; set; }
         public string Nome { get; set; }
@@ -41,7 +41,7 @@ namespace TESTE_DEMARIA.CLASSES.Utils
 
     }
 
-    public class Produto
+    public class Produtos
     {
         public int IdProduto { get; set; }
         public string Nome { get; set; }

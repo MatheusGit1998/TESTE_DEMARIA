@@ -1,17 +1,16 @@
-﻿
-CREATE TABLE public.cadastro_de_clientes (
+﻿CREATE TABLE cadastro_de_clientes (
     cliente_id SERIAL PRIMARY KEY,
-    nome VARCHAR(100),
-    email VARCHAR(100),
-    telefone VARCHAR(20),
-    cpf VARCHAR(100),
-    logradouro VARCHAR(100),
-    numero VARCHAR(100),
-    complemento VARCHAR(100),
-    bairro VARCHAR(100),
-    localidade VARCHAR(100),
-    uf VARCHAR(100),
-    cep VARCHAR(100),
-    data_cadastro TIMESTAMP WITHOUT TIME ZONE
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    cpf VARCHAR(100) NOT NULL UNIQUE,
+    logradouro VARCHAR(100) NOT NULL,
+    numero VARCHAR(100) NOT NULL,
+    complemento VARCHAR(100), 
+    bairro VARCHAR(100) NOT NULL,
+    localidade VARCHAR(100) NOT NULL,
+    uf VARCHAR(100) NOT NULL,
+    cep VARCHAR(100) NOT NULL,
+    data_cadastro TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    ativo BOOLEAN DEFAULT TRUE NOT NULL
 );
-

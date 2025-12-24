@@ -78,15 +78,15 @@
             this.TextLocalidade = new MaterialSkin.Controls.MaterialTextBox2();
             this.TextBairro = new MaterialSkin.Controls.MaterialTextBox2();
             this.TextComplemento = new MaterialSkin.Controls.MaterialTextBox2();
-            this.TextLogradouro = new MaterialSkin.Controls.MaterialTextBox2();
-            this.TextEmail = new MaterialSkin.Controls.MaterialTextBox2();
             this.TextNomeCompleto = new MaterialSkin.Controls.MaterialTextBox2();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.LabelStatusCliente = new MaterialSkin.Controls.MaterialLabel();
             this.TextNum = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.TextTelefone = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.TextCEP = new MaterialSkin.Controls.MaterialMaskedTextBox();
+            this.TextLogradouro = new MaterialSkin.Controls.MaterialTextBox2();
             this.TextCPF = new MaterialSkin.Controls.MaterialMaskedTextBox();
+            this.TextEmail = new MaterialSkin.Controls.MaterialTextBox2();
             this.PRODUTOS = new System.Windows.Forms.TabPage();
             this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -106,10 +106,10 @@
             this.materialCard12 = new MaterialSkin.Controls.MaterialCard();
             this.TextBuscaProduto = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialCard7 = new MaterialSkin.Controls.MaterialCard();
-            this.TextDescricao = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
             this.TextValor = new MaterialSkin.Controls.MaterialTextBox2();
             this.TextProduto = new MaterialSkin.Controls.MaterialTextBox2();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.TextDescricao = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
             this.LabelStatus = new MaterialSkin.Controls.MaterialLabel();
             this.TextQuatidade = new MaterialSkin.Controls.MaterialMaskedTextBox();
             this.VENDAS = new System.Windows.Forms.TabPage();
@@ -128,6 +128,7 @@
             this.materialCard25 = new MaterialSkin.Controls.MaterialCard();
             this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             this.materialCard20 = new MaterialSkin.Controls.MaterialCard();
+            this.textProdutoVendas = new MaterialSkin.Controls.MaterialTextBox2();
             this.btn_RetirarSelecionados = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.materialCard33 = new MaterialSkin.Controls.MaterialCard();
             this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
@@ -141,7 +142,6 @@
             this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
             this.textNomeClienteVendas = new MaterialSkin.Controls.MaterialTextBox2();
             this.textQuantidadeVendas = new MaterialSkin.Controls.MaterialTextBox2();
-            this.textProdutoVendas = new MaterialSkin.Controls.MaterialTextBox2();
             this.btn_buscaClienteVenda = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.materialCard27 = new MaterialSkin.Controls.MaterialCard();
             this.TextBucarClienteVendas = new MaterialSkin.Controls.MaterialMaskedTextBox();
@@ -476,6 +476,7 @@
             this.materialFloatingActionButton1.TabIndex = 4;
             this.materialFloatingActionButton1.Text = "materialFloatingActionButton1";
             this.materialFloatingActionButton1.UseVisualStyleBackColor = true;
+            this.materialFloatingActionButton1.Click += new System.EventHandler(this.materialFloatingActionButton1_Click);
             // 
             // materialCard11
             // 
@@ -683,7 +684,7 @@
             this.listViewClientes.Location = new System.Drawing.Point(16, 19);
             this.listViewClientes.Name = "listViewClientes";
             this.listViewClientes.Size = new System.Drawing.Size(1476, 137);
-            this.listViewClientes.TabIndex = 0;
+            this.listViewClientes.TabIndex = 18;
             this.listViewClientes.UseCompatibleStateImageBehavior = false;
             // 
             // materialCard3
@@ -899,7 +900,7 @@
             this.Text_buscaCliente.ShortcutsEnabled = true;
             this.Text_buscaCliente.Size = new System.Drawing.Size(348, 48);
             this.Text_buscaCliente.SkipLiterals = true;
-            this.Text_buscaCliente.TabIndex = 4;
+            this.Text_buscaCliente.TabIndex = 11;
             this.Text_buscaCliente.TabStop = false;
             this.Text_buscaCliente.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.Text_buscaCliente.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
@@ -914,8 +915,6 @@
             this.materialCard2.Controls.Add(this.TextLocalidade);
             this.materialCard2.Controls.Add(this.TextBairro);
             this.materialCard2.Controls.Add(this.TextComplemento);
-            this.materialCard2.Controls.Add(this.TextLogradouro);
-            this.materialCard2.Controls.Add(this.TextEmail);
             this.materialCard2.Controls.Add(this.TextNomeCompleto);
             this.materialCard2.Controls.Add(this.groupBox1);
             this.materialCard2.Depth = 0;
@@ -948,7 +947,7 @@
             this.ComboUF.Name = "ComboUF";
             this.ComboUF.Size = new System.Drawing.Size(120, 49);
             this.ComboUF.StartIndex = 0;
-            this.ComboUF.TabIndex = 21;
+            this.ComboUF.TabIndex = 10;
             this.ComboUF.Tag = "UF";
             // 
             // TextLocalidade
@@ -974,7 +973,7 @@
             this.TextLocalidade.SelectionStart = 0;
             this.TextLocalidade.ShortcutsEnabled = true;
             this.TextLocalidade.Size = new System.Drawing.Size(303, 48);
-            this.TextLocalidade.TabIndex = 20;
+            this.TextLocalidade.TabIndex = 9;
             this.TextLocalidade.TabStop = false;
             this.TextLocalidade.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextLocalidade.TrailingIcon = null;
@@ -1003,7 +1002,7 @@
             this.TextBairro.SelectionStart = 0;
             this.TextBairro.ShortcutsEnabled = true;
             this.TextBairro.Size = new System.Drawing.Size(279, 48);
-            this.TextBairro.TabIndex = 19;
+            this.TextBairro.TabIndex = 8;
             this.TextBairro.TabStop = false;
             this.TextBairro.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextBairro.TrailingIcon = null;
@@ -1032,69 +1031,11 @@
             this.TextComplemento.SelectionStart = 0;
             this.TextComplemento.ShortcutsEnabled = true;
             this.TextComplemento.Size = new System.Drawing.Size(315, 48);
-            this.TextComplemento.TabIndex = 18;
+            this.TextComplemento.TabIndex = 7;
             this.TextComplemento.TabStop = false;
             this.TextComplemento.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextComplemento.TrailingIcon = null;
             this.TextComplemento.UseSystemPasswordChar = false;
-            // 
-            // TextLogradouro
-            // 
-            this.TextLogradouro.AnimateReadOnly = false;
-            this.TextLogradouro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.TextLogradouro.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.TextLogradouro.Depth = 0;
-            this.TextLogradouro.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.TextLogradouro.HideSelection = true;
-            this.TextLogradouro.Hint = "LOGRADOURO";
-            this.TextLogradouro.LeadingIcon = null;
-            this.TextLogradouro.Location = new System.Drawing.Point(109, 265);
-            this.TextLogradouro.MaxLength = 32767;
-            this.TextLogradouro.MouseState = MaterialSkin.MouseState.OUT;
-            this.TextLogradouro.Name = "TextLogradouro";
-            this.TextLogradouro.PasswordChar = '\0';
-            this.TextLogradouro.PrefixSuffixText = null;
-            this.TextLogradouro.ReadOnly = false;
-            this.TextLogradouro.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.TextLogradouro.SelectedText = "";
-            this.TextLogradouro.SelectionLength = 0;
-            this.TextLogradouro.SelectionStart = 0;
-            this.TextLogradouro.ShortcutsEnabled = true;
-            this.TextLogradouro.Size = new System.Drawing.Size(279, 48);
-            this.TextLogradouro.TabIndex = 16;
-            this.TextLogradouro.TabStop = false;
-            this.TextLogradouro.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.TextLogradouro.TrailingIcon = null;
-            this.TextLogradouro.UseSystemPasswordChar = false;
-            // 
-            // TextEmail
-            // 
-            this.TextEmail.AnimateReadOnly = false;
-            this.TextEmail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.TextEmail.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.TextEmail.Depth = 0;
-            this.TextEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.TextEmail.HideSelection = true;
-            this.TextEmail.Hint = "E-MAIL";
-            this.TextEmail.LeadingIcon = null;
-            this.TextEmail.Location = new System.Drawing.Point(109, 169);
-            this.TextEmail.MaxLength = 32767;
-            this.TextEmail.MouseState = MaterialSkin.MouseState.OUT;
-            this.TextEmail.Name = "TextEmail";
-            this.TextEmail.PasswordChar = '\0';
-            this.TextEmail.PrefixSuffixText = null;
-            this.TextEmail.ReadOnly = false;
-            this.TextEmail.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.TextEmail.SelectedText = "";
-            this.TextEmail.SelectionLength = 0;
-            this.TextEmail.SelectionStart = 0;
-            this.TextEmail.ShortcutsEnabled = true;
-            this.TextEmail.Size = new System.Drawing.Size(279, 48);
-            this.TextEmail.TabIndex = 13;
-            this.TextEmail.TabStop = false;
-            this.TextEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.TextEmail.TrailingIcon = null;
-            this.TextEmail.UseSystemPasswordChar = false;
             // 
             // TextNomeCompleto
             // 
@@ -1120,7 +1061,7 @@
             this.TextNomeCompleto.SelectionStart = 0;
             this.TextNomeCompleto.ShortcutsEnabled = true;
             this.TextNomeCompleto.Size = new System.Drawing.Size(507, 48);
-            this.TextNomeCompleto.TabIndex = 11;
+            this.TextNomeCompleto.TabIndex = 0;
             this.TextNomeCompleto.TabStop = false;
             this.TextNomeCompleto.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextNomeCompleto.TrailingIcon = null;
@@ -1132,7 +1073,9 @@
             this.groupBox1.Controls.Add(this.TextNum);
             this.groupBox1.Controls.Add(this.TextTelefone);
             this.groupBox1.Controls.Add(this.TextCEP);
+            this.groupBox1.Controls.Add(this.TextLogradouro);
             this.groupBox1.Controls.Add(this.TextCPF);
+            this.groupBox1.Controls.Add(this.TextEmail);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(24, 17);
             this.groupBox1.Name = "groupBox1";
@@ -1187,7 +1130,7 @@
             this.TextNum.ShortcutsEnabled = true;
             this.TextNum.Size = new System.Drawing.Size(110, 48);
             this.TextNum.SkipLiterals = true;
-            this.TextNum.TabIndex = 3;
+            this.TextNum.TabIndex = 6;
             this.TextNum.TabStop = false;
             this.TextNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextNum.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
@@ -1209,7 +1152,7 @@
             this.TextTelefone.HideSelection = true;
             this.TextTelefone.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
             this.TextTelefone.LeadingIcon = null;
-            this.TextTelefone.Location = new System.Drawing.Point(385, 152);
+            this.TextTelefone.Location = new System.Drawing.Point(385, 150);
             this.TextTelefone.Mask = "";
             this.TextTelefone.MaxLength = 32767;
             this.TextTelefone.MouseState = MaterialSkin.MouseState.OUT;
@@ -1251,7 +1194,7 @@
             this.TextCEP.HideSelection = true;
             this.TextCEP.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
             this.TextCEP.LeadingIcon = null;
-            this.TextCEP.Location = new System.Drawing.Point(624, 152);
+            this.TextCEP.Location = new System.Drawing.Point(625, 150);
             this.TextCEP.Mask = "";
             this.TextCEP.MaxLength = 32767;
             this.TextCEP.MouseState = MaterialSkin.MouseState.OUT;
@@ -1271,7 +1214,7 @@
             this.TextCEP.ShortcutsEnabled = true;
             this.TextCEP.Size = new System.Drawing.Size(206, 48);
             this.TextCEP.SkipLiterals = true;
-            this.TextCEP.TabIndex = 1;
+            this.TextCEP.TabIndex = 4;
             this.TextCEP.TabStop = false;
             this.TextCEP.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextCEP.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
@@ -1279,6 +1222,35 @@
             this.TextCEP.UseSystemPasswordChar = false;
             this.TextCEP.ValidatingType = null;
             this.TextCEP.Leave += new System.EventHandler(this.TextCEP_Leave);
+            // 
+            // TextLogradouro
+            // 
+            this.TextLogradouro.AnimateReadOnly = false;
+            this.TextLogradouro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.TextLogradouro.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.TextLogradouro.Depth = 0;
+            this.TextLogradouro.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.TextLogradouro.HideSelection = true;
+            this.TextLogradouro.Hint = "LOGRADOURO";
+            this.TextLogradouro.LeadingIcon = null;
+            this.TextLogradouro.Location = new System.Drawing.Point(84, 248);
+            this.TextLogradouro.MaxLength = 32767;
+            this.TextLogradouro.MouseState = MaterialSkin.MouseState.OUT;
+            this.TextLogradouro.Name = "TextLogradouro";
+            this.TextLogradouro.PasswordChar = '\0';
+            this.TextLogradouro.PrefixSuffixText = null;
+            this.TextLogradouro.ReadOnly = false;
+            this.TextLogradouro.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.TextLogradouro.SelectedText = "";
+            this.TextLogradouro.SelectionLength = 0;
+            this.TextLogradouro.SelectionStart = 0;
+            this.TextLogradouro.ShortcutsEnabled = true;
+            this.TextLogradouro.Size = new System.Drawing.Size(279, 48);
+            this.TextLogradouro.TabIndex = 5;
+            this.TextLogradouro.TabStop = false;
+            this.TextLogradouro.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.TextLogradouro.TrailingIcon = null;
+            this.TextLogradouro.UseSystemPasswordChar = false;
             // 
             // TextCPF
             // 
@@ -1314,7 +1286,7 @@
             this.TextCPF.ShortcutsEnabled = true;
             this.TextCPF.Size = new System.Drawing.Size(207, 48);
             this.TextCPF.SkipLiterals = true;
-            this.TextCPF.TabIndex = 0;
+            this.TextCPF.TabIndex = 1;
             this.TextCPF.TabStop = false;
             this.TextCPF.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextCPF.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
@@ -1322,6 +1294,35 @@
             this.TextCPF.UseSystemPasswordChar = false;
             this.TextCPF.ValidatingType = null;
             this.TextCPF.Leave += new System.EventHandler(this.TextCPF_Leave);
+            // 
+            // TextEmail
+            // 
+            this.TextEmail.AnimateReadOnly = false;
+            this.TextEmail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.TextEmail.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.TextEmail.Depth = 0;
+            this.TextEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.TextEmail.HideSelection = true;
+            this.TextEmail.Hint = "E-MAIL";
+            this.TextEmail.LeadingIcon = null;
+            this.TextEmail.Location = new System.Drawing.Point(84, 150);
+            this.TextEmail.MaxLength = 32767;
+            this.TextEmail.MouseState = MaterialSkin.MouseState.OUT;
+            this.TextEmail.Name = "TextEmail";
+            this.TextEmail.PasswordChar = '\0';
+            this.TextEmail.PrefixSuffixText = null;
+            this.TextEmail.ReadOnly = false;
+            this.TextEmail.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.TextEmail.SelectedText = "";
+            this.TextEmail.SelectionLength = 0;
+            this.TextEmail.SelectionStart = 0;
+            this.TextEmail.ShortcutsEnabled = true;
+            this.TextEmail.Size = new System.Drawing.Size(279, 48);
+            this.TextEmail.TabIndex = 3;
+            this.TextEmail.TabStop = false;
+            this.TextEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.TextEmail.TrailingIcon = null;
+            this.TextEmail.UseSystemPasswordChar = false;
             // 
             // PRODUTOS
             // 
@@ -1579,7 +1580,6 @@
             // materialCard7
             // 
             this.materialCard7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCard7.Controls.Add(this.TextDescricao);
             this.materialCard7.Controls.Add(this.TextValor);
             this.materialCard7.Controls.Add(this.TextProduto);
             this.materialCard7.Controls.Add(this.groupBox3);
@@ -1592,32 +1592,6 @@
             this.materialCard7.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard7.Size = new System.Drawing.Size(965, 400);
             this.materialCard7.TabIndex = 2;
-            // 
-            // TextDescricao
-            // 
-            this.TextDescricao.AnimateReadOnly = false;
-            this.TextDescricao.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.TextDescricao.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.TextDescricao.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextDescricao.Depth = 0;
-            this.TextDescricao.HideSelection = true;
-            this.TextDescricao.Hint = "DESCRIÇÃO ";
-            this.TextDescricao.Location = new System.Drawing.Point(59, 214);
-            this.TextDescricao.MaxLength = 32767;
-            this.TextDescricao.MouseState = MaterialSkin.MouseState.OUT;
-            this.TextDescricao.Name = "TextDescricao";
-            this.TextDescricao.PasswordChar = '\0';
-            this.TextDescricao.ReadOnly = false;
-            this.TextDescricao.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.TextDescricao.SelectedText = "";
-            this.TextDescricao.SelectionLength = 0;
-            this.TextDescricao.SelectionStart = 0;
-            this.TextDescricao.ShortcutsEnabled = true;
-            this.TextDescricao.Size = new System.Drawing.Size(842, 130);
-            this.TextDescricao.TabIndex = 5;
-            this.TextDescricao.TabStop = false;
-            this.TextDescricao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.TextDescricao.UseSystemPasswordChar = false;
             // 
             // TextValor
             // 
@@ -1680,6 +1654,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.TextDescricao);
             this.groupBox3.Controls.Add(this.LabelStatus);
             this.groupBox3.Controls.Add(this.TextQuatidade);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1689,6 +1664,32 @@
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "CADASTRO PRODUTOS";
+            // 
+            // TextDescricao
+            // 
+            this.TextDescricao.AnimateReadOnly = false;
+            this.TextDescricao.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.TextDescricao.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.TextDescricao.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.TextDescricao.Depth = 0;
+            this.TextDescricao.HideSelection = true;
+            this.TextDescricao.Hint = "DESCRIÇÃO ";
+            this.TextDescricao.Location = new System.Drawing.Point(39, 188);
+            this.TextDescricao.MaxLength = 32767;
+            this.TextDescricao.MouseState = MaterialSkin.MouseState.OUT;
+            this.TextDescricao.Name = "TextDescricao";
+            this.TextDescricao.PasswordChar = '\0';
+            this.TextDescricao.ReadOnly = false;
+            this.TextDescricao.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.TextDescricao.SelectedText = "";
+            this.TextDescricao.SelectionLength = 0;
+            this.TextDescricao.SelectionStart = 0;
+            this.TextDescricao.ShortcutsEnabled = true;
+            this.TextDescricao.Size = new System.Drawing.Size(842, 130);
+            this.TextDescricao.TabIndex = 3;
+            this.TextDescricao.TabStop = false;
+            this.TextDescricao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.TextDescricao.UseSystemPasswordChar = false;
             // 
             // LabelStatus
             // 
@@ -1736,7 +1737,7 @@
             this.TextQuatidade.ShortcutsEnabled = true;
             this.TextQuatidade.Size = new System.Drawing.Size(193, 48);
             this.TextQuatidade.SkipLiterals = true;
-            this.TextQuatidade.TabIndex = 4;
+            this.TextQuatidade.TabIndex = 2;
             this.TextQuatidade.TabStop = false;
             this.TextQuatidade.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextQuatidade.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
@@ -1770,7 +1771,7 @@
             this.materialCard30.Name = "materialCard30";
             this.materialCard30.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard30.Size = new System.Drawing.Size(634, 338);
-            this.materialCard30.TabIndex = 3;
+            this.materialCard30.TabIndex = 33;
             // 
             // groupBox7
             // 
@@ -1779,7 +1780,7 @@
             this.groupBox7.Location = new System.Drawing.Point(17, 17);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(600, 298);
-            this.groupBox7.TabIndex = 10;
+            this.groupBox7.TabIndex = 30;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "PEDIDOS FINALIZADOS";
             // 
@@ -1789,7 +1790,7 @@
             this.listViewVendas.Location = new System.Drawing.Point(18, 24);
             this.listViewVendas.Name = "listViewVendas";
             this.listViewVendas.Size = new System.Drawing.Size(561, 254);
-            this.listViewVendas.TabIndex = 1;
+            this.listViewVendas.TabIndex = 18;
             this.listViewVendas.UseCompatibleStateImageBehavior = false;
             // 
             // materialCard22
@@ -1804,7 +1805,7 @@
             this.materialCard22.Name = "materialCard22";
             this.materialCard22.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard22.Size = new System.Drawing.Size(886, 338);
-            this.materialCard22.TabIndex = 2;
+            this.materialCard22.TabIndex = 32;
             // 
             // groupBox6
             // 
@@ -1813,7 +1814,7 @@
             this.groupBox6.Location = new System.Drawing.Point(17, 17);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(852, 298);
-            this.groupBox6.TabIndex = 9;
+            this.groupBox6.TabIndex = 31;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "PEDIDO EM ANDAMENTO";
             // 
@@ -1823,7 +1824,7 @@
             this.listViewPedidosEmAndamento.Location = new System.Drawing.Point(15, 24);
             this.listViewPedidosEmAndamento.Name = "listViewPedidosEmAndamento";
             this.listViewPedidosEmAndamento.Size = new System.Drawing.Size(820, 254);
-            this.listViewPedidosEmAndamento.TabIndex = 0;
+            this.listViewPedidosEmAndamento.TabIndex = 17;
             this.listViewPedidosEmAndamento.UseCompatibleStateImageBehavior = false;
             // 
             // materialCard21
@@ -1838,7 +1839,7 @@
             this.materialCard21.Name = "materialCard21";
             this.materialCard21.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard21.Size = new System.Drawing.Size(634, 371);
-            this.materialCard21.TabIndex = 1;
+            this.materialCard21.TabIndex = 38;
             // 
             // groupBox5
             // 
@@ -1850,7 +1851,7 @@
             this.groupBox5.Location = new System.Drawing.Point(17, 17);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(600, 341);
-            this.groupBox5.TabIndex = 8;
+            this.groupBox5.TabIndex = 37;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "AÇÕES";
             // 
@@ -1862,7 +1863,7 @@
             this.btn_Finalizarpedido.MouseState = MaterialSkin.MouseState.HOVER;
             this.btn_Finalizarpedido.Name = "btn_Finalizarpedido";
             this.btn_Finalizarpedido.Size = new System.Drawing.Size(56, 56);
-            this.btn_Finalizarpedido.TabIndex = 6;
+            this.btn_Finalizarpedido.TabIndex = 16;
             this.btn_Finalizarpedido.Text = "materialFloatingActionButton9";
             this.btn_Finalizarpedido.UseVisualStyleBackColor = true;
             this.btn_Finalizarpedido.Click += new System.EventHandler(this.btn_Finalizarpedido_Click);
@@ -1875,7 +1876,7 @@
             this.btn_novopedido.MouseState = MaterialSkin.MouseState.HOVER;
             this.btn_novopedido.Name = "btn_novopedido";
             this.btn_novopedido.Size = new System.Drawing.Size(56, 56);
-            this.btn_novopedido.TabIndex = 4;
+            this.btn_novopedido.TabIndex = 15;
             this.btn_novopedido.Text = "materialFloatingActionButton11";
             this.btn_novopedido.UseVisualStyleBackColor = true;
             this.btn_novopedido.Click += new System.EventHandler(this.btn_novopedido_Click);
@@ -1892,7 +1893,7 @@
             this.materialCard23.Name = "materialCard23";
             this.materialCard23.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard23.Size = new System.Drawing.Size(351, 72);
-            this.materialCard23.TabIndex = 2;
+            this.materialCard23.TabIndex = 35;
             // 
             // materialLabel8
             // 
@@ -1918,7 +1919,7 @@
             this.materialCard25.Name = "materialCard25";
             this.materialCard25.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard25.Size = new System.Drawing.Size(351, 72);
-            this.materialCard25.TabIndex = 1;
+            this.materialCard25.TabIndex = 36;
             // 
             // materialLabel10
             // 
@@ -1935,6 +1936,7 @@
             // materialCard20
             // 
             this.materialCard20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard20.Controls.Add(this.textProdutoVendas);
             this.materialCard20.Controls.Add(this.btn_RetirarSelecionados);
             this.materialCard20.Controls.Add(this.materialCard33);
             this.materialCard20.Controls.Add(this.textCPFVendas);
@@ -1945,7 +1947,6 @@
             this.materialCard20.Controls.Add(this.materialCard28);
             this.materialCard20.Controls.Add(this.textNomeClienteVendas);
             this.materialCard20.Controls.Add(this.textQuantidadeVendas);
-            this.materialCard20.Controls.Add(this.textProdutoVendas);
             this.materialCard20.Controls.Add(this.btn_buscaClienteVenda);
             this.materialCard20.Controls.Add(this.materialCard27);
             this.materialCard20.Controls.Add(this.NumericoQuantidadeDesejada);
@@ -1959,7 +1960,37 @@
             this.materialCard20.Name = "materialCard20";
             this.materialCard20.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard20.Size = new System.Drawing.Size(886, 371);
-            this.materialCard20.TabIndex = 0;
+            this.materialCard20.TabIndex = 34;
+            // 
+            // textProdutoVendas
+            // 
+            this.textProdutoVendas.AnimateReadOnly = false;
+            this.textProdutoVendas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.textProdutoVendas.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.textProdutoVendas.Depth = 0;
+            this.textProdutoVendas.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textProdutoVendas.HideSelection = true;
+            this.textProdutoVendas.Hint = "Produto";
+            this.textProdutoVendas.LeadingIcon = null;
+            this.textProdutoVendas.Location = new System.Drawing.Point(43, 106);
+            this.textProdutoVendas.MaxLength = 32767;
+            this.textProdutoVendas.MouseState = MaterialSkin.MouseState.OUT;
+            this.textProdutoVendas.Name = "textProdutoVendas";
+            this.textProdutoVendas.PasswordChar = '\0';
+            this.textProdutoVendas.PrefixSuffix = MaterialSkin.Controls.MaterialTextBox2.PrefixSuffixTypes.Prefix;
+            this.textProdutoVendas.PrefixSuffixText = null;
+            this.textProdutoVendas.ReadOnly = true;
+            this.textProdutoVendas.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textProdutoVendas.SelectedText = "";
+            this.textProdutoVendas.SelectionLength = 0;
+            this.textProdutoVendas.SelectionStart = 0;
+            this.textProdutoVendas.ShortcutsEnabled = true;
+            this.textProdutoVendas.Size = new System.Drawing.Size(377, 48);
+            this.textProdutoVendas.TabIndex = 2;
+            this.textProdutoVendas.TabStop = false;
+            this.textProdutoVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.textProdutoVendas.TrailingIcon = null;
+            this.textProdutoVendas.UseSystemPasswordChar = false;
             // 
             // btn_RetirarSelecionados
             // 
@@ -1969,7 +2000,7 @@
             this.btn_RetirarSelecionados.MouseState = MaterialSkin.MouseState.HOVER;
             this.btn_RetirarSelecionados.Name = "btn_RetirarSelecionados";
             this.btn_RetirarSelecionados.Size = new System.Drawing.Size(56, 56);
-            this.btn_RetirarSelecionados.TabIndex = 23;
+            this.btn_RetirarSelecionados.TabIndex = 20;
             this.btn_RetirarSelecionados.Text = "materialFloatingActionButton14";
             this.btn_RetirarSelecionados.UseVisualStyleBackColor = true;
             this.btn_RetirarSelecionados.Click += new System.EventHandler(this.btn_RetirarSelecionados_Click);
@@ -1986,7 +2017,7 @@
             this.materialCard33.Name = "materialCard33";
             this.materialCard33.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard33.Size = new System.Drawing.Size(215, 63);
-            this.materialCard33.TabIndex = 22;
+            this.materialCard33.TabIndex = 39;
             // 
             // materialLabel13
             // 
@@ -2024,7 +2055,7 @@
             this.textCPFVendas.SelectionStart = 0;
             this.textCPFVendas.ShortcutsEnabled = true;
             this.textCPFVendas.Size = new System.Drawing.Size(160, 48);
-            this.textCPFVendas.TabIndex = 21;
+            this.textCPFVendas.TabIndex = 6;
             this.textCPFVendas.TabStop = false;
             this.textCPFVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textCPFVendas.TrailingIcon = null;
@@ -2054,7 +2085,7 @@
             this.textValorVendas.SelectionStart = 0;
             this.textValorVendas.ShortcutsEnabled = true;
             this.textValorVendas.Size = new System.Drawing.Size(232, 48);
-            this.textValorVendas.TabIndex = 20;
+            this.textValorVendas.TabIndex = 4;
             this.textValorVendas.TabStop = false;
             this.textValorVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textValorVendas.TrailingIcon = null;
@@ -2103,7 +2134,7 @@
             this.btn_adicionarPedido.MouseState = MaterialSkin.MouseState.HOVER;
             this.btn_adicionarPedido.Name = "btn_adicionarPedido";
             this.btn_adicionarPedido.Size = new System.Drawing.Size(56, 56);
-            this.btn_adicionarPedido.TabIndex = 17;
+            this.btn_adicionarPedido.TabIndex = 19;
             this.btn_adicionarPedido.Text = "materialFloatingActionButton14";
             this.btn_adicionarPedido.UseVisualStyleBackColor = true;
             this.btn_adicionarPedido.Click += new System.EventHandler(this.btn_adicionarPedido_Click);
@@ -2120,7 +2151,7 @@
             this.materialCard28.Name = "materialCard28";
             this.materialCard28.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard28.Size = new System.Drawing.Size(215, 63);
-            this.materialCard28.TabIndex = 16;
+            this.materialCard28.TabIndex = 40;
             // 
             // materialLabel11
             // 
@@ -2158,7 +2189,7 @@
             this.textNomeClienteVendas.SelectionStart = 0;
             this.textNomeClienteVendas.ShortcutsEnabled = true;
             this.textNomeClienteVendas.Size = new System.Drawing.Size(302, 48);
-            this.textNomeClienteVendas.TabIndex = 14;
+            this.textNomeClienteVendas.TabIndex = 5;
             this.textNomeClienteVendas.TabStop = false;
             this.textNomeClienteVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textNomeClienteVendas.TrailingIcon = null;
@@ -2174,7 +2205,7 @@
             this.textQuantidadeVendas.HideSelection = true;
             this.textQuantidadeVendas.Hint = "QTD Estoque";
             this.textQuantidadeVendas.LeadingIcon = null;
-            this.textQuantidadeVendas.Location = new System.Drawing.Point(436, 106);
+            this.textQuantidadeVendas.Location = new System.Drawing.Point(438, 106);
             this.textQuantidadeVendas.MaxLength = 32767;
             this.textQuantidadeVendas.MouseState = MaterialSkin.MouseState.OUT;
             this.textQuantidadeVendas.Name = "textQuantidadeVendas";
@@ -2188,41 +2219,11 @@
             this.textQuantidadeVendas.SelectionStart = 0;
             this.textQuantidadeVendas.ShortcutsEnabled = true;
             this.textQuantidadeVendas.Size = new System.Drawing.Size(124, 48);
-            this.textQuantidadeVendas.TabIndex = 12;
+            this.textQuantidadeVendas.TabIndex = 3;
             this.textQuantidadeVendas.TabStop = false;
             this.textQuantidadeVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textQuantidadeVendas.TrailingIcon = null;
             this.textQuantidadeVendas.UseSystemPasswordChar = false;
-            // 
-            // textProdutoVendas
-            // 
-            this.textProdutoVendas.AnimateReadOnly = false;
-            this.textProdutoVendas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.textProdutoVendas.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.textProdutoVendas.Depth = 0;
-            this.textProdutoVendas.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textProdutoVendas.HideSelection = true;
-            this.textProdutoVendas.Hint = "Produto";
-            this.textProdutoVendas.LeadingIcon = null;
-            this.textProdutoVendas.Location = new System.Drawing.Point(43, 106);
-            this.textProdutoVendas.MaxLength = 32767;
-            this.textProdutoVendas.MouseState = MaterialSkin.MouseState.OUT;
-            this.textProdutoVendas.Name = "textProdutoVendas";
-            this.textProdutoVendas.PasswordChar = '\0';
-            this.textProdutoVendas.PrefixSuffix = MaterialSkin.Controls.MaterialTextBox2.PrefixSuffixTypes.Prefix;
-            this.textProdutoVendas.PrefixSuffixText = null;
-            this.textProdutoVendas.ReadOnly = true;
-            this.textProdutoVendas.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.textProdutoVendas.SelectedText = "";
-            this.textProdutoVendas.SelectionLength = 0;
-            this.textProdutoVendas.SelectionStart = 0;
-            this.textProdutoVendas.ShortcutsEnabled = true;
-            this.textProdutoVendas.Size = new System.Drawing.Size(377, 48);
-            this.textProdutoVendas.TabIndex = 8;
-            this.textProdutoVendas.TabStop = false;
-            this.textProdutoVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.textProdutoVendas.TrailingIcon = null;
-            this.textProdutoVendas.UseSystemPasswordChar = false;
             // 
             // btn_buscaClienteVenda
             // 
@@ -2232,7 +2233,7 @@
             this.btn_buscaClienteVenda.MouseState = MaterialSkin.MouseState.HOVER;
             this.btn_buscaClienteVenda.Name = "btn_buscaClienteVenda";
             this.btn_buscaClienteVenda.Size = new System.Drawing.Size(56, 56);
-            this.btn_buscaClienteVenda.TabIndex = 11;
+            this.btn_buscaClienteVenda.TabIndex = 26;
             this.btn_buscaClienteVenda.Text = "materialFloatingActionButton13";
             this.btn_buscaClienteVenda.UseVisualStyleBackColor = true;
             this.btn_buscaClienteVenda.Click += new System.EventHandler(this.btn_buscaClienteVenda_Click);
@@ -2265,7 +2266,7 @@
             this.TextBucarClienteVendas.HideSelection = true;
             this.TextBucarClienteVendas.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
             this.TextBucarClienteVendas.LeadingIcon = null;
-            this.TextBucarClienteVendas.Location = new System.Drawing.Point(17, 13);
+            this.TextBucarClienteVendas.Location = new System.Drawing.Point(17, 12);
             this.TextBucarClienteVendas.Mask = "";
             this.TextBucarClienteVendas.MaxLength = 32767;
             this.TextBucarClienteVendas.MouseState = MaterialSkin.MouseState.OUT;
@@ -2285,7 +2286,7 @@
             this.TextBucarClienteVendas.ShortcutsEnabled = true;
             this.TextBucarClienteVendas.Size = new System.Drawing.Size(298, 48);
             this.TextBucarClienteVendas.SkipLiterals = true;
-            this.TextBucarClienteVendas.TabIndex = 21;
+            this.TextBucarClienteVendas.TabIndex = 2;
             this.TextBucarClienteVendas.TabStop = false;
             this.TextBucarClienteVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextBucarClienteVendas.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
@@ -2299,17 +2300,17 @@
             this.NumericoQuantidadeDesejada.Location = new System.Drawing.Point(681, 165);
             this.NumericoQuantidadeDesejada.Name = "NumericoQuantidadeDesejada";
             this.NumericoQuantidadeDesejada.Size = new System.Drawing.Size(128, 47);
-            this.NumericoQuantidadeDesejada.TabIndex = 9;
+            this.NumericoQuantidadeDesejada.TabIndex = 7;
             // 
             // btn_buscaProdutoVenda
             // 
             this.btn_buscaProdutoVenda.Depth = 0;
             this.btn_buscaProdutoVenda.Icon = ((System.Drawing.Image)(resources.GetObject("btn_buscaProdutoVenda.Icon")));
-            this.btn_buscaProdutoVenda.Location = new System.Drawing.Point(364, 26);
+            this.btn_buscaProdutoVenda.Location = new System.Drawing.Point(367, 26);
             this.btn_buscaProdutoVenda.MouseState = MaterialSkin.MouseState.HOVER;
             this.btn_buscaProdutoVenda.Name = "btn_buscaProdutoVenda";
             this.btn_buscaProdutoVenda.Size = new System.Drawing.Size(56, 56);
-            this.btn_buscaProdutoVenda.TabIndex = 3;
+            this.btn_buscaProdutoVenda.TabIndex = 25;
             this.btn_buscaProdutoVenda.Text = "materialFloatingActionButton12";
             this.btn_buscaProdutoVenda.UseVisualStyleBackColor = true;
             this.btn_buscaProdutoVenda.Click += new System.EventHandler(this.btn_buscaProdutoVenda_Click);
@@ -2338,7 +2339,7 @@
             this.TextBucarProdutoVendas.HideSelection = true;
             this.TextBucarProdutoVendas.Hint = "Busca por Produto";
             this.TextBucarProdutoVendas.LeadingIcon = null;
-            this.TextBucarProdutoVendas.Location = new System.Drawing.Point(17, 13);
+            this.TextBucarProdutoVendas.Location = new System.Drawing.Point(17, 12);
             this.TextBucarProdutoVendas.MaxLength = 32767;
             this.TextBucarProdutoVendas.MouseState = MaterialSkin.MouseState.OUT;
             this.TextBucarProdutoVendas.Name = "TextBucarProdutoVendas";
@@ -2352,11 +2353,12 @@
             this.TextBucarProdutoVendas.SelectionStart = 0;
             this.TextBucarProdutoVendas.ShortcutsEnabled = true;
             this.TextBucarProdutoVendas.Size = new System.Drawing.Size(297, 48);
-            this.TextBucarProdutoVendas.TabIndex = 7;
+            this.TextBucarProdutoVendas.TabIndex = 0;
             this.TextBucarProdutoVendas.TabStop = false;
             this.TextBucarProdutoVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextBucarProdutoVendas.TrailingIcon = null;
             this.TextBucarProdutoVendas.UseSystemPasswordChar = false;
+            this.TextBucarProdutoVendas.Click += new System.EventHandler(this.TextBucarProdutoVendas_Click);
             // 
             // RELATÓRIOS
             // 

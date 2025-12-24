@@ -15,6 +15,8 @@ using MaterialSkin.Controls;
 using Microsoft.Reporting.WinForms;
 using Newtonsoft.Json;
 using TESTE_DEMARIA.CLASSES.BASE_DE_DADOS;
+using TESTE_DEMARIA.CLASSES.OBJETOS;
+using TESTE_DEMARIA.CLASSES.Utils;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static TESTE_DEMARIA.CLASSES.Utils.ConsultaCEP;
@@ -61,7 +63,11 @@ namespace TESTE_DEMARIA.FORMS
             Label_TotalDeClientesAtivos.Font = new Font("Segoe UI", 50, FontStyle.Bold);
             Label_QuantidadeDeVendidos.Font = new Font("Segoe UI", 50, FontStyle.Bold);
             LabelTotal.Font = new Font("Segoe UI", 22, FontStyle.Bold);
-            NumericoQuantidadeDesejada.Font = new Font("Arial", 22, FontStyle.Bold);
+          
+            NumericUpDown numerico = NumericoQuantidadeDesejada;
+            numerico.Controls[1].Font = new Font("Arial", 25, FontStyle.Bold);
+
+            NumericoQuantidadeDesejada.Font = new Font("Arial", 25, FontStyle.Bold);
             listViewOpcoesRelatorios.View = View.List; 
             listViewOpcoesRelatorios.Items.Clear();   
             listViewOpcoesRelatorios.Font = new Font("Segoe UI", 18, FontStyle.Regular);
@@ -98,13 +104,39 @@ namespace TESTE_DEMARIA.FORMS
             TextNum.PromptChar = ' ';
             TextQuatidade.Mask = "000000000000000";
             TextQuatidade.PromptChar = ' ';
+
+            this.ActiveControl = TextNomeCompleto;
+
+
+            TextNomeCompleto.TabIndex = 0;
+            TextCPF.TabIndex = 1;
+            TextEmail.TabIndex = 2;
+            TextTelefone.TabIndex = 3;
+            TextCEP.TabIndex = 4;
+            TextLogradouro.TabIndex = 5;
+            TextNum.TabIndex = 6;
+            TextComplemento.TabIndex = 7;
+            TextBairro.TabIndex = 8;
+            TextLocalidade.TabIndex = 9;
+            ComboUF.TabIndex = 10;
+            Text_buscaCliente.TabIndex = 11;
+
+            TextBucarProdutoVendas.TabIndex = 0;
+            TextBucarClienteVendas.TabIndex = 1;
+            textProdutoVendas.TabIndex = 2;
+            textQuantidadeVendas.TabIndex = 3;
+            textValorVendas.TabIndex = 4;
+            textNomeClienteVendas.TabIndex = 5;
+            textCPFVendas.TabIndex = 6;
+            NumericoQuantidadeDesejada.TabIndex = 7;
+
             #endregion
         }
 
         #region METODOS UTILIZADOS
         public void AtualizarTotaldeVendasHOME()
         {
-            var comando = new ComandosSQL();
+            var comando = new VendasSQL();
             decimal total = comando.ObterTotalDeVendas();
             Label_Totaldevendas.Text = ("R$ " + total.ToString());
 
@@ -112,7 +144,7 @@ namespace TESTE_DEMARIA.FORMS
 
         public void AtualizarTotaldeEstoqueHOME()
         {
-            var comando = new ComandosSQL();
+            var comando = new ProdutoSQL();
             int total = comando.ObterQtdItemsEmEstoque();
             Label_TotalDeItensEmEstoque.Text = total.ToString();
 
@@ -120,7 +152,7 @@ namespace TESTE_DEMARIA.FORMS
 
         public void AtualizarTotaldeAtivosHOME()
         {
-            var comando = new ComandosSQL();
+            var comando = new ClienteSQL();
             int total = comando.ObterQtdClientesAtivos();
             Label_TotalDeClientesAtivos.Text = total.ToString();
 
@@ -128,7 +160,7 @@ namespace TESTE_DEMARIA.FORMS
 
         public void AtualizaritemsvendidosHOME()
         {
-            var comando = new ComandosSQL();
+            var comando = new VendasSQL();
             int total = comando.ObterQtdItemsVendidos();
             Label_QuantidadeDeVendidos.Text = total.ToString();
         }
@@ -150,7 +182,7 @@ namespace TESTE_DEMARIA.FORMS
             listViewClientes.Columns.Add("UF", 50);
             listViewClientes.Columns.Add("CEP", 100);
             listViewClientes.Columns.Add("Data Cadastro", 100);
-            var comandos2 = new ComandosSQL();
+            var comandos2 = new ClienteSQL();
             comandos2.CarregarClientes(listViewClientes);
         }
 
@@ -164,8 +196,8 @@ namespace TESTE_DEMARIA.FORMS
             listViewVendas.Columns.Add("Data Venda", 200);
             listViewVendas.Columns.Add("Valor total", 100);
 
-            var comandos2 = new ComandosSQL();
-            comandos2.CarregarVendas(listViewVendas);
+            var comando = new VendasSQL();
+            comando.CarregarVendas(listViewVendas);
         }
 
         private void LimparCamposVendas()
@@ -219,7 +251,7 @@ namespace TESTE_DEMARIA.FORMS
             listViewProdutos.Columns.Add("Estoque", 120);
             listViewProdutos.Columns.Add("Criado em", 150);
 
-            var comandos2 = new ComandosSQL();
+            var comandos2 = new ProdutoSQL();
             comandos2.CarregarProduto(listViewProdutos);
         }
 
@@ -236,7 +268,7 @@ namespace TESTE_DEMARIA.FORMS
 
                 if (indiceSelecionado == 0)
                 {
-                    var comando = new ComandosSQL();
+                    var comando = new FiltrosReportReviewerSQL();
                     DateTime datainicio = dateTimePickerInicio.Value.Date.AddHours(00).AddMinutes(00).AddSeconds(59); ;
                     DateTime datafim = dateTimePickerFim.Value.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
@@ -257,7 +289,7 @@ namespace TESTE_DEMARIA.FORMS
                 }
                 else if (indiceSelecionado == 1)
                 {
-                    var comando = new ComandosSQL();
+                    var comando = new FiltrosReportReviewerSQL();
                     DataTable dtClientes = comando.ObterDadosClientes();
 
                     ReportViewer rv = new ReportViewer();
@@ -275,7 +307,7 @@ namespace TESTE_DEMARIA.FORMS
                 }
                 else if (indiceSelecionado == 2)
                 {
-                    var comando = new ComandosSQL();
+                    var comando = new FiltrosReportReviewerSQL();
                     DataTable dtClientes = comando.ObterDadosProduto();
 
                     ReportViewer rv = new ReportViewer();
@@ -392,20 +424,27 @@ namespace TESTE_DEMARIA.FORMS
             }
             else
             {
-                var comandos = new ComandosSQL();
-                comandos.SalvarCliente(
-                TextNomeCompleto.Text,
-                TextEmail.Text,
-                TextTelefone.Text,
-                TextCPF.Text,
-                TextLogradouro.Text,
-                TextNum.Text.Replace(" ",""),
-                TextComplemento.Text,
-                TextBairro.Text,
-                TextLocalidade.Text,
-                ComboUF.Text,
-                TextCEP.Text
-                );
+
+
+                var cliente = new Cliente
+                {
+                    Nome = TextNomeCompleto.Text,
+                    Email = TextEmail.Text,
+                    Telefone = TextTelefone.Text,
+                    Cpf = TextCPF.Text,
+                    Logradouro = TextLogradouro.Text,
+                    Numero = TextNum.Text,
+                    Complemento = TextComplemento.Text,
+                    Bairro = TextBairro.Text,
+                    Localidade = TextLocalidade.Text,
+                    Uf = ComboUF.Text,
+                    Cep = TextCEP.Text
+                  };
+     
+
+                var clienteSQL = new ClienteSQL();
+                clienteSQL.SalvarCliente1(cliente);
+
 
                 AtualizarListviewClientes();
             }
@@ -418,27 +457,33 @@ namespace TESTE_DEMARIA.FORMS
             if (!string.IsNullOrEmpty(Text_buscaCliente.Text))
             {
 
-                string ativo = "";
-                var comandos = new ComandosSQL();
-                comandos.BuscarClientePorCPF(
-                    Text_buscaCliente.Text,
-                    TextNomeCompleto,
-                    TextEmail,
-                    TextTelefone,
-                    TextCPF,
-                    TextLogradouro,
-                    TextNum,
-                    TextComplemento,
-                    TextBairro,
-                    TextLocalidade,
-                    ComboUF,
-                    TextCEP,
-                    ref ativo
-                );
+                var clienteSQL = new ClienteSQL();
+                var cliente = clienteSQL.BuscarClientePorCPF1(Text_buscaCliente.Text);
+
+                if (cliente != null)
+                {
+                    TextNomeCompleto.Text = cliente.Nome;
+                    TextEmail.Text = cliente.Email;
+                    TextTelefone.Text = cliente.Telefone;
+                    TextCPF.Text = cliente.Cpf;
+                    TextLogradouro.Text = cliente.Logradouro;
+                    TextNum.Text = cliente.Numero;
+                    TextComplemento.Text = cliente.Complemento;
+                    TextBairro.Text = cliente.Bairro;
+                    TextLocalidade.Text = cliente.Localidade;
+                    ComboUF.Text = cliente.Uf;
+                    TextCEP.Text = cliente.Cep;
+                }
+                else
+                {
+                    MessageBox.Show("Cliente não encontrado!");
+                }
+
+
 
                 ComboUF.Refresh();
 
-                if (ativo == "True")
+                if (cliente.Ativo == true)
                 {
                     LabelStatusCliente.Text = "STATUS DO CLIENTE: ATIVO";
                 }
@@ -466,8 +511,8 @@ namespace TESTE_DEMARIA.FORMS
 
             if ( resultado == DialogResult.Yes)
             {
-                var comandos = new ComandosSQL();
-                comandos.DeletarClientePorCPF(TextCPF.Text);
+                var clienteSQL = new ClienteSQL();
+                clienteSQL.DeletarClientePorCPF1(TextCPF.Text);
                 AtualizarListviewClientes();
             }
             LimparCamposClientes();
@@ -494,15 +539,20 @@ namespace TESTE_DEMARIA.FORMS
                     string texto = TextValor.Text.Replace(",", ".");
                     float valor = float.Parse(texto, System.Globalization.CultureInfo.InvariantCulture);
                     int quantidade = Convert.ToInt32(TextQuatidade.Text.Replace(" ", ""));
-                    var comandos = new ComandosSQL();
-                    comandos.SalvarProduto(
-                    TextProduto.Text,
-                    TextDescricao.Text,
-                    valor,
-                    quantidade
-                    );
 
-                    AtualizarListviewProdutos();
+                var produto = new Produto
+                {
+                    Nome = TextProduto.Text,
+                    Descricao = TextDescricao.Text,
+                    Valor = valor,
+                    Estoque = quantidade,
+                };
+
+
+                var produtoSQL = new ProdutoSQL();
+                produtoSQL.SalvarProduto1(produto);
+
+                AtualizarListviewProdutos();
                 }
                 else
                 {
@@ -519,20 +569,25 @@ namespace TESTE_DEMARIA.FORMS
             if (!string.IsNullOrEmpty(TextBuscaProduto.Text))
             {
 
-                string ativo = "";
-                var comandos = new ComandosSQL();
-                comandos.BuscarProdutoPorNome(
-                    TextBuscaProduto.Text,
-                    TextProduto,
-                    TextDescricao,
-                    TextValor,
-                    TextQuatidade,
-                   ref ativo
-                );
+                var produtoSQL = new ProdutoSQL();
+                var produto = produtoSQL.BuscarProdutoPorNome1(TextBuscaProduto.Text);
 
-                
+                if (produto != null)
+                {
+                    TextProduto.Text = produto.Nome;
+                    TextDescricao.Text = produto.Descricao;
+                    TextValor.Text = produto.Valor.ToString();
+                    TextQuatidade.Text = produto.Estoque.ToString();
 
-                if (ativo == "True")
+                }
+                else
+                {
+                    MessageBox.Show("Produto não encontrado!");
+                }
+
+
+
+                if (produto.Ativo == true)
                 {
                     LabelStatus.Text = "STATUS DO PRODUTO: ATIVO";
                 }
@@ -587,8 +642,8 @@ namespace TESTE_DEMARIA.FORMS
 
             if (resultado == DialogResult.Yes)
             {
-                var comandos = new ComandosSQL();
-                comandos.DeletarProdutoPorNome(TextProduto.Text);
+                var produtoSQL = new ProdutoSQL();
+                produtoSQL.DeletarProdutoPorNome1(TextProduto.Text);
                 AtualizarListviewProdutos();
             }
             LimparCamposProdutos();
@@ -601,7 +656,7 @@ namespace TESTE_DEMARIA.FORMS
 
             if (!string.IsNullOrEmpty(TextBucarProdutoVendas.Text))
             {
-                var comandos = new ComandosSQL();
+                var comandos = new ProdutoSQL();
                 comandos.BuscarProdutoPorNomeVendas(
                     TextBucarProdutoVendas.Text,
                     textProdutoVendas,
@@ -619,7 +674,7 @@ namespace TESTE_DEMARIA.FORMS
         private void btn_buscaClienteVenda_Click(object sender, EventArgs e)
         {
 
-                var comandos = new ComandosSQL();
+                var comandos = new ClienteSQL();
                 comandos.BuscarClientePorNomeVendas(
                     TextBucarClienteVendas.Text,
                     textNomeClienteVendas,
@@ -645,21 +700,21 @@ namespace TESTE_DEMARIA.FORMS
             {
                     int QTDadicionado =Convert.ToInt32(NumericoQuantidadeDesejada.Value);
 
-                    var comandos = new ComandosSQL();
-                    int EstoqueAtual = comandos.ValidarEstoque(textProdutoVendas.Text);
+                    var produtoSQL = new ProdutoSQL();
+                    int EstoqueAtual = produtoSQL.ValidarEstoque1(textProdutoVendas.Text);
+                    textQuantidadeVendas.Text = EstoqueAtual.ToString();
 
-                    if ( EstoqueAtual < QTDadicionado)
+                if ( EstoqueAtual < QTDadicionado)
                     {
                         MessageBox.Show($"Sem itens suficiente em estoque. \n\nHá {EstoqueAtual.ToString()} disponiveis.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     else
                     {
-                        comandos = new ComandosSQL();
-                        comandos.AtualizarEstoque(
-                        textProdutoVendas.Text,
-                        QTDadicionado
-                        );
+
+                    produtoSQL = new ProdutoSQL();
+                    produtoSQL.AtualizarEstoque1(textProdutoVendas.Text, QTDadicionado);
+
                     }
 
 
@@ -685,8 +740,9 @@ namespace TESTE_DEMARIA.FORMS
                         }
                         else
                         {
-                            comandos = new ComandosSQL();
-                            int idproduto = comandos.ObterIdProduto(textProdutoVendas.Text);
+                            produtoSQL = new ProdutoSQL();
+                            int idproduto = produtoSQL.ObterIdProduto1(textProdutoVendas.Text);
+
                             listViewPedidosEmAndamento.CheckBoxes = true;
                             listViewPedidosEmAndamento.View = View.Details;
                             listViewPedidosEmAndamento.Columns.Add("PRODUTO", 220);
@@ -722,9 +778,9 @@ namespace TESTE_DEMARIA.FORMS
                     {
                         MessageBox.Show("Quantidade de mercadorias invalida. \n\nColoque um valor maior que '0'.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
-                     comandos = new ComandosSQL();
-                    EstoqueAtual = comandos.ValidarEstoque(textProdutoVendas.Text);
-                    textQuantidadeVendas.Text = EstoqueAtual.ToString();
+                produtoSQL = new ProdutoSQL();
+                EstoqueAtual = produtoSQL.ValidarEstoque1(textProdutoVendas.Text);
+                textQuantidadeVendas.Text = EstoqueAtual.ToString();
             }   
         }
 
@@ -737,16 +793,13 @@ namespace TESTE_DEMARIA.FORMS
                 string produto = item.SubItems[0].Text;
                 int quantidade = Convert.ToInt32(qtd);
 
-                var comandos = new ComandosSQL();
-                comandos.RetomarEstoque(
-                produto,
-                quantidade
-                );
+                var produtoSQL = new ProdutoSQL();
+                produtoSQL.RetomarEstoque1(produto, quantidade);
 
                 if (produto == textProdutoVendas.Text)
                 {
-                    comandos = new ComandosSQL();
-                    int EstoqueAtual = comandos.ValidarEstoque(textProdutoVendas.Text);
+                    produtoSQL = new ProdutoSQL();
+                    int EstoqueAtual = produtoSQL.ValidarEstoque1(textProdutoVendas.Text);
                     textQuantidadeVendas.Text = EstoqueAtual.ToString();
                 }
 
@@ -774,13 +827,13 @@ namespace TESTE_DEMARIA.FORMS
             else
             {
 
-                var comandos = new ComandosSQL();
-                int idCliente = comandos.ObterIdCliente(TextBucarClienteVendas.Text);
+                var cliente = new ClienteSQL();
+                int idCliente = cliente.ObterIdCliente1(TextBucarClienteVendas.Text);
                 string CapValor = LabelTotal.Text.Replace("R$ ", "");
                 float ValorTotal = float.Parse(CapValor);
 
-                comandos = new ComandosSQL();
-                int idVenda = comandos.RegistrarVendaBase1(idCliente, ValorTotal);
+                var venda = new VendasSQL();
+                int idVenda = venda.RegistrarVendaBase1(idCliente, ValorTotal);
                 foreach (ListViewItem item in listViewPedidosEmAndamento.Items)
                 {
 
@@ -789,8 +842,8 @@ namespace TESTE_DEMARIA.FORMS
                     float valorunitario = float.Parse(item.SubItems[3].Text);
                     float valortotal = float.Parse(item.SubItems[4].Text);
 
-                    comandos = new ComandosSQL();
-                    comandos.RegistrarVendaBase2(
+                    venda = new VendasSQL();
+                    venda.RegistrarVendaBase2(
                         idVenda,
                         idproduto,
                         Quatidade,
@@ -830,16 +883,13 @@ namespace TESTE_DEMARIA.FORMS
                 string produto = item.SubItems[0].Text;
                 int quantidade = Convert.ToInt32(qtd);
 
-                var comandos = new ComandosSQL();
-                comandos.RetomarEstoque(
-                produto,
-                quantidade
-                );
+                var produtoSQL = new ProdutoSQL();
+                produtoSQL.RetomarEstoque1(produto, quantidade);
 
                 if (produto == textProdutoVendas.Text)
                 {
-                    comandos = new ComandosSQL();
-                    int EstoqueAtual = comandos.ValidarEstoque(textProdutoVendas.Text);
+                     produtoSQL = new ProdutoSQL();
+                    int EstoqueAtual = produtoSQL.ValidarEstoque1(textProdutoVendas.Text);
                     textQuantidadeVendas.Text = EstoqueAtual.ToString();
                 }
 
@@ -852,5 +902,14 @@ namespace TESTE_DEMARIA.FORMS
         }
         #endregion
 
+        private void TextBucarProdutoVendas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialFloatingActionButton1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

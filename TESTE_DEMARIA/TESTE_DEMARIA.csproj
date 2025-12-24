@@ -207,9 +207,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CLASSES\BASE DE DADOS\ComandosSQL.cs" />
+    <Compile Include="CLASSES\BASE DE DADOS\ClienteSQL.cs" />
+    <Compile Include="CLASSES\BASE DE DADOS\FiltrosReportReviewerSQL.cs" />
     <Compile Include="CLASSES\BASE DE DADOS\ConexaoBD.cs" />
+    <Compile Include="CLASSES\BASE DE DADOS\ProdutoSQL.cs" />
     <Compile Include="CLASSES\BASE DE DADOS\TesteCon.cs" />
+    <Compile Include="CLASSES\BASE DE DADOS\VendasSQL.cs" />
+    <Compile Include="CLASSES\OBJETOS\Venda.cs" />
+    <Compile Include="CLASSES\OBJETOS\Produto.cs" />
+    <Compile Include="CLASSES\OBJETOS\Cliente.cs" />
     <Compile Include="CLASSES\Utils\AlimentarReportReviewer.cs" />
     <Compile Include="CLASSES\Utils\ConsultaCEP.cs" />
     <Compile Include="CLASSES\Utils\ValidarCPF.cs" />
@@ -290,6 +296,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SCRIPTS\Criação Banco de dados.sql" />
     <Content Include="SCRIPTS\Criação tabela Items Vendas.sql" />
     <Content Include="SCRIPTS\Criação tabela Vendas.sql" />
     <Content Include="SCRIPTS\Criação tabela Produtos .sql" />
