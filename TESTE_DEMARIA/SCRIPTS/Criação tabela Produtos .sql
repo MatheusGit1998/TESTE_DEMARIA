@@ -1,9 +1,10 @@
-﻿CREATE TABLE cadastro_de_produtos (
+﻿-- Tabela de produtos
+CREATE TABLE cadastro_de_produtos (
     id_produto SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     valor NUMERIC(30,2) NOT NULL CHECK (valor >= 0),
     estoque INTEGER NOT NULL CHECK (estoque >= 0),
-    criado_em TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    criado_em TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     ativo BOOLEAN DEFAULT TRUE NOT NULL
 );
