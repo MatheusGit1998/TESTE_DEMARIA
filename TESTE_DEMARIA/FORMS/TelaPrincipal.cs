@@ -38,24 +38,56 @@ namespace TESTE_DEMARIA.FORMS
         {
             InitializeComponent();
 
-            #region CONFIGURAÇÕES DE INICIO
-
-            //ATUALIZA INFORMAÇÕES HOME
-            AtualizarTotaldeVendasHOME();
-            AtualizarTotaldeEstoqueHOME();
-            AtualizarTotaldeAtivosHOME();
-            AtualizaritemsvendidosHOME();
-
-            //ATUALIZA LISTVIEWS
-            AtualizarListviewClientes();
-            AtualizarListviewProdutos();
-            AtualizarListviewVendas();
-
             //CONFIG DE INTERFACE MATERIALSKIN
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+
+            #region CONFIGURAÇÕES DE INICIO
+
+            string caminho = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "dados_form.json");
+
+            // SE NÃO EXISTIR O ARQUIVO DE CONGIG CRIA ELE
+            if (!File.Exists(caminho))
+            {
+             File.WriteAllText(caminho, "{}");
+            }
+            else
+            {
+
+            }
+
+            string conteudo = File.ReadAllText(caminho).Trim();
+
+            // Verifica se está vazio ou só com {}
+            if (!string.IsNullOrEmpty(conteudo) && conteudo != "{}")
+            {
+                // ATUALIZA INFORMAÇÕES HOME
+                AtualizarTotaldeVendasHOME();
+                AtualizarTotaldeEstoqueHOME();
+                AtualizarTotaldeAtivosHOME();
+                AtualizaritemsvendidosHOME();
+
+                // ATUALIZA LISTVIEWS
+                AtualizarListviewClientes();
+                AtualizarListviewProdutos();
+                AtualizarListviewVendas();
+            }
+            else
+            {
+                MessageBox.Show(
+                "Bem-vindo(a)!\n\nPara utilizar a ferramenta, é necessário realizar a configuração inicial:\n\n" +
+                "1. Acesse a aba 'Conexão BD'.\n" +
+                "2. Preencha os dados do banco de dados.\n" +
+                "3. Clique em 'Salvar'.\n\n" +
+                "A aplicação informará automaticamente se a conexão foi estabelecida com sucesso.",
+                "Configuração de Primeiro Acesso",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
+            }
+
 
             //CONFIG ELEMENTOS 
             Label_Totaldevendas.Font = new Font("Segoe UI", 28, FontStyle.Bold);

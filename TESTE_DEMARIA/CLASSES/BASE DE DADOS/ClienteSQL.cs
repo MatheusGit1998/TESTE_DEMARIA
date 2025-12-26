@@ -364,7 +364,7 @@ namespace TESTE_DEMARIA.CLASSES.BASE_DE_DADOS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao carregar clientes: " + ex.Message);
+                MessageBox.Show("Erro ao carregar clientes:CarregarClientes " + ex.Message);
             }
         }
 

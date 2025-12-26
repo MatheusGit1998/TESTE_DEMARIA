@@ -19,7 +19,10 @@ namespace TESTE_DEMARIA.CLASSES.BASE_DE_DADOS
         public DadosFormulario CarregarDados()
         {
             if (!File.Exists(caminho))
+            {
                 throw new FileNotFoundException("Arquivo JSON não encontrado: " + caminho);
+            }
+
 
             string json = File.ReadAllText(caminho);
             return JsonConvert.DeserializeObject<DadosFormulario>(json);
