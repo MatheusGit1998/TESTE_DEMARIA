@@ -253,7 +253,7 @@ namespace TESTE_DEMARIA.FORMS
 
         #endregion
 
-        #region RELATORIOS REPORT REVIEWER
+        #region RELATORIOS REPORT VIEWER
 
         //GERA O RELATORIO SELECIONADO
         private void Btn_GerarRelatorio_Click_1(object sender, EventArgs e)
@@ -264,7 +264,7 @@ namespace TESTE_DEMARIA.FORMS
 
                 if (indiceSelecionado == 0)
                 {
-                    var comando = new FiltrosReportReviewerSQL();
+                    var comando = new FiltrosReportViewerSQL();
                     DateTime datainicio = dateTimePickerInicio.Value.Date.AddHours(00).AddMinutes(00).AddSeconds(59); ;
                     DateTime datafim = dateTimePickerFim.Value.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
@@ -285,7 +285,7 @@ namespace TESTE_DEMARIA.FORMS
                 }
                 else if (indiceSelecionado == 1)
                 {
-                    var comando = new FiltrosReportReviewerSQL();
+                    var comando = new FiltrosReportViewerSQL();
                     DataTable dtClientes = comando.ObterDadosClientes();
 
                     ReportViewer rv = new ReportViewer();
@@ -303,7 +303,7 @@ namespace TESTE_DEMARIA.FORMS
                 }
                 else if (indiceSelecionado == 2)
                 {
-                    var comando = new FiltrosReportReviewerSQL();
+                    var comando = new FiltrosReportViewerSQL();
                     DataTable dtClientes = comando.ObterDadosProduto();
 
                     ReportViewer rv = new ReportViewer();

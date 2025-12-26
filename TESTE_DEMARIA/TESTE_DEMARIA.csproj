@@ -208,7 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CLASSES\BASE DE DADOS\ClienteSQL.cs" />
-    <Compile Include="CLASSES\BASE DE DADOS\FiltrosReportReviewerSQL.cs" />
+    <Compile Include="CLASSES\BASE DE DADOS\FiltrosReportViewerSQL.cs" />
     <Compile Include="CLASSES\BASE DE DADOS\ConexaoBD.cs" />
     <Compile Include="CLASSES\BASE DE DADOS\ProdutoSQL.cs" />
     <Compile Include="CLASSES\BASE DE DADOS\TesteCon.cs" />

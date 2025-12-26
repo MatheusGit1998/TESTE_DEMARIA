@@ -16,12 +16,12 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace TESTE_DEMARIA.CLASSES.BASE_DE_DADOS
 {
-    public class FiltrosReportReviewerSQL
+    public class FiltrosReportViewerSQL
     {
         private readonly ConexaoBD _conexao;
 
         //INICIA UM NOVO COMANDO
-        public FiltrosReportReviewerSQL()
+        public FiltrosReportViewerSQL()
         {
             _conexao = new ConexaoBD();
         }

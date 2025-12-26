@@ -46,93 +46,104 @@ namespace TESTE_DEMARIA.CLASSES.BASE_DE_DADOS
             const string sqlReativar = @"
             UPDATE cadastro_de_produtos SET ativo = TRUE WHERE (nome) = (@nome);";
 
-            try
+
+            if (produto.Valor <= 0)
             {
-                using (var conn = new NpgsqlConnection(_conexao.GetConnectionString()))
+
+                MessageBox.Show("Valor menor ou igual a '0'!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+
+
+                try
                 {
-                    conn.Open();
-
-                    using (var checkCmd = new NpgsqlCommand(sqlCheck, conn))
+                    using (var conn = new NpgsqlConnection(_conexao.GetConnectionString()))
                     {
-                        checkCmd.Parameters.AddWithValue("@nome", nome);
-                        long existe = Convert.ToInt64(checkCmd.ExecuteScalar());
-                        using (var checkstatus = new NpgsqlCommand(sqlCheckstatus, conn))
+                        conn.Open();
+
+                        using (var checkCmd = new NpgsqlCommand(sqlCheck, conn))
                         {
-                            if (existe > 0)
+                            checkCmd.Parameters.AddWithValue("@nome", nome);
+                            long existe = Convert.ToInt64(checkCmd.ExecuteScalar());
+                            using (var checkstatus = new NpgsqlCommand(sqlCheckstatus, conn))
                             {
-                                checkstatus.Parameters.AddWithValue("@nome", nome);
-                                bool status = (bool)checkstatus.ExecuteScalar();
-
-
-                                if (status == true)
+                                if (existe > 0)
                                 {
-                                    var resultado = MessageBox.Show(
-                                    "Já existe um produto com este nome. Deseja substituir as informações?",
-                                    "Confirmação",
-                                    MessageBoxButtons.YesNo,
-                                    MessageBoxIcon.Question
-                                    );
-                                    if (resultado == DialogResult.No)
+                                    checkstatus.Parameters.AddWithValue("@nome", nome);
+                                    bool status = (bool)checkstatus.ExecuteScalar();
+
+
+                                    if (status == true)
                                     {
-                                        return;
+                                        var resultado = MessageBox.Show(
+                                        "Já existe um produto com este nome. Deseja substituir as informações?",
+                                        "Confirmação",
+                                        MessageBoxButtons.YesNo,
+                                        MessageBoxIcon.Question
+                                        );
+                                        if (resultado == DialogResult.No)
+                                        {
+                                            return;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        var resultado = MessageBox.Show(
+                                        "Já existe um produto com este nome, mas esta inativo. Deseja substituir as informações e reativar?",
+                                        "Confirmação",
+                                        MessageBoxButtons.YesNo,
+                                        MessageBoxIcon.Question
+                                        );
+                                        if (resultado == DialogResult.No)
+                                        {
+                                            return;
+                                        }
+                                        // EM CASO DE AFIRMATIVO FAZ UPDATE STATUS
+                                        using (var cmd = new NpgsqlCommand(sqlReativar, conn))
+                                        {
+                                            cmd.Parameters.AddWithValue("@nome", nome);
+                                            int linhasAfetadas = cmd.ExecuteNonQuery();
+                                            MessageBox.Show($"Produto reativado com sucesso!");
+                                        }
+                                    }
+
+                                    // EM CASO DE AFIRMATIVO FAZ UPDATE DADOS
+                                    using (var cmd = new NpgsqlCommand(sqlUpdate, conn))
+                                    {
+                                        cmd.Parameters.AddWithValue("@nome", nome);
+                                        cmd.Parameters.AddWithValue("@descricao", descricao);
+                                        cmd.Parameters.AddWithValue("@valor", produto.Valor);
+                                        cmd.Parameters.AddWithValue("@estoque", produto.Estoque);
+
+
+                                        int linhasAfetadas = cmd.ExecuteNonQuery();
+                                        MessageBox.Show($"Produto atualizado com sucesso!");
                                     }
                                 }
                                 else
                                 {
-                                    var resultado = MessageBox.Show(
-                                    "Já existe um produto com este nome, mas esta inativo. Deseja substituir as informações e reativar?",
-                                    "Confirmação",
-                                    MessageBoxButtons.YesNo,
-                                    MessageBoxIcon.Question
-                                    );
-                                    if (resultado == DialogResult.No)
-                                    {
-                                        return;
-                                    }
-                                    // EM CASO DE AFIRMATIVO FAZ UPDATE STATUS
-                                    using (var cmd = new NpgsqlCommand(sqlReativar, conn))
+                                    // FAZ INSERT CASO NÃO EXISTA
+                                    using (var cmd = new NpgsqlCommand(sqlInsert, conn))
                                     {
                                         cmd.Parameters.AddWithValue("@nome", nome);
+                                        cmd.Parameters.AddWithValue("@descricao", descricao);
+                                        cmd.Parameters.AddWithValue("@valor", produto.Valor);
+                                        cmd.Parameters.AddWithValue("@estoque", produto.Estoque);
+                                        ;
+
                                         int linhasAfetadas = cmd.ExecuteNonQuery();
-                                        MessageBox.Show($"Produto reativado com sucesso!");
+                                        MessageBox.Show($"Produto inserido com sucesso!");
                                     }
-                                }
-
-                                // EM CASO DE AFIRMATIVO FAZ UPDATE DADOS
-                                using (var cmd = new NpgsqlCommand(sqlUpdate, conn))
-                                {
-                                    cmd.Parameters.AddWithValue("@nome", nome);
-                                    cmd.Parameters.AddWithValue("@descricao", descricao);
-                                    cmd.Parameters.AddWithValue("@valor", produto.Valor);
-                                    cmd.Parameters.AddWithValue("@estoque", produto.Estoque);
-
-
-                                    int linhasAfetadas = cmd.ExecuteNonQuery();
-                                    MessageBox.Show($"Produto atualizado com sucesso!");
-                                }
-                            }
-                            else
-                            {
-                                // FAZ INSERT CASO NÃO EXISTA
-                                using (var cmd = new NpgsqlCommand(sqlInsert, conn))
-                                {
-                                    cmd.Parameters.AddWithValue("@nome", nome);
-                                    cmd.Parameters.AddWithValue("@descricao", descricao);
-                                    cmd.Parameters.AddWithValue("@valor", produto.Valor);
-                                    cmd.Parameters.AddWithValue("@estoque", produto.Estoque);
-                                    ;
-
-                                    int linhasAfetadas = cmd.ExecuteNonQuery();
-                                    MessageBox.Show($"Produto inserido com sucesso!");
                                 }
                             }
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao salvar Produto: " + ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao salvar Produto: " + ex.Message);
+                }
             }
         }
         #endregion
