@@ -296,11 +296,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SCRIPTS\Criação Banco de dados.sql" />
-    <Content Include="SCRIPTS\Criação tabela Items Vendas.sql" />
-    <Content Include="SCRIPTS\Criação tabela Vendas.sql" />
-    <Content Include="SCRIPTS\Criação tabela Produtos .sql" />
-    <Content Include="SCRIPTS\Criação tabela clientes.sql" />
+    <Content Include="SCRIPTS\1 -Criação Banco de dados.sql" />
+    <Content Include="SCRIPTS\5 -Criação tabela Items Vendas.sql" />
+    <Content Include="SCRIPTS\4 -Criação tabela Vendas.sql" />
+    <Content Include="SCRIPTS\3 -Criação tabela Produtos .sql" />
+    <Content Include="SCRIPTS\2 -Criação tabela clientes.sql" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AxRDPCOMAPILib">

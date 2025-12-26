@@ -149,15 +149,6 @@ namespace TESTE_DEMARIA.CLASSES.BASE_DE_DADOS
             }
             catch (Exception ex)
             {
-                if (ex.Message == "Objeto não pode ser convertido de DBNull em outros tipos.")
-                {
-
-                }
-                else
-                {
-                    MessageBox.Show("Erro ao obter total de vendas: " + ex.Message);
-
-                }
                 return 0;
             }
         }
@@ -183,15 +174,6 @@ namespace TESTE_DEMARIA.CLASSES.BASE_DE_DADOS
             }
             catch (Exception ex)
             {
-                if (ex.Message == "Objeto não pode ser convertido de DBNull em outros tipos.")
-                {
-                   
-                }
-                else
-                {
-                    MessageBox.Show("Erro ao obter total de items vendidos ativos: " + ex.Message);
-                    
-                }
                 return 0;
             }
         }

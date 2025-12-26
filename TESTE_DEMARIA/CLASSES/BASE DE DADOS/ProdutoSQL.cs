@@ -350,7 +350,6 @@ namespace TESTE_DEMARIA.CLASSES.BASE_DE_DADOS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao obter total de vendas: " + ex.Message);
                 return 0;
             }
         }

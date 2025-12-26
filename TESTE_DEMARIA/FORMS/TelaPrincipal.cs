@@ -123,12 +123,8 @@ namespace TESTE_DEMARIA.FORMS
 
             TextBucarProdutoVendas.TabIndex = 0;
             TextBucarClienteVendas.TabIndex = 1;
-            textProdutoVendas.TabIndex = 2;
-            textQuantidadeVendas.TabIndex = 3;
-            textValorVendas.TabIndex = 4;
-            textNomeClienteVendas.TabIndex = 5;
-            textCPFVendas.TabIndex = 6;
-            NumericoQuantidadeDesejada.TabIndex = 7;
+            NumericoQuantidadeDesejada.TabIndex = 2;
+            textCPFVendas.TabStop = false;
 
             #endregion
         }
@@ -335,21 +331,6 @@ namespace TESTE_DEMARIA.FORMS
         #endregion
 
         #region TELA DE CONFIG CONEXAO
-        private void Btn_testar_conexao_Click(object sender, EventArgs e)
-        {
-            var teste = new TesteCon();
-
-            try
-            {
-                teste.TestarConexao();
-                MessageBox.Show("Conexão realizada com sucesso!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro na conexão: " + ex.Message);
-            }
-        }
-
         private void btn_salvarconfig_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(campo_host.Text))
@@ -387,10 +368,31 @@ namespace TESTE_DEMARIA.FORMS
                 string json = JsonConvert.SerializeObject(dados, Formatting.Indented);
 
                 File.WriteAllText(caminho, json);
-                MessageBox.Show($"Informações salvas em: {caminho}");
+                MessageBox.Show($"Informações salvas!");
 
-                MessageBox.Show("Conexão pronta: ", "SUCESSO!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
+            var teste = new TesteCon();
+
+            try
+            {
+                teste.TestarConexao();
+                MessageBox.Show("Conexão realizada com sucesso!");
+
+                //ATUALIZA INFORMAÇÕES HOME
+                AtualizarTotaldeVendasHOME();
+                AtualizarTotaldeEstoqueHOME();
+                AtualizarTotaldeAtivosHOME();
+                AtualizaritemsvendidosHOME();
+
+                //ATUALIZA LISTVIEWS
+                AtualizarListviewClientes();
+                AtualizarListviewProdutos();
+                AtualizarListviewVendas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro na conexão: " + ex.Message);
             }
         }
 
@@ -454,7 +456,7 @@ namespace TESTE_DEMARIA.FORMS
         private void BTN_BuscaClientes_Click(object sender, EventArgs e)
         {
 
-            if (!string.IsNullOrEmpty(Text_buscaCliente.Text))
+            if (Text_buscaCliente.Text != "   .   .   -")
             {
 
                 var clienteSQL = new ClienteSQL();
@@ -483,13 +485,20 @@ namespace TESTE_DEMARIA.FORMS
 
                 ComboUF.Refresh();
 
-                if (cliente.Ativo == true)
+                if (cliente != null)
                 {
-                    LabelStatusCliente.Text = "STATUS DO CLIENTE: ATIVO";
+                    if (cliente.Ativo == true)
+                    {
+                        LabelStatusCliente.Text = "Ativo";
+                    }
+                    else
+                    {
+                        LabelStatusCliente.Text = "Inativo";
+                    }
                 }
                 else
                 {
-                    LabelStatusCliente.Text = "STATUS DO CLIENTE: INATIVO";
+                    MessageBox.Show("Sem clientes cadastrados");
                 }
 
             }
@@ -501,21 +510,28 @@ namespace TESTE_DEMARIA.FORMS
 
         private void BTN_ExcluirCliente_Click(object sender, EventArgs e)
         {
-
-            var resultado = MessageBox.Show(
-            "Tem certeza que deseja deletar este cliente?",
-            "Confirmação",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-            );
-
-            if ( resultado == DialogResult.Yes)
+            if (TextCPF.Text != "   .   .   -")
             {
-                var clienteSQL = new ClienteSQL();
-                clienteSQL.DeletarClientePorCPF1(TextCPF.Text);
-                AtualizarListviewClientes();
+                var resultado = MessageBox.Show(
+                "Tem certeza que deseja deletar este cliente?",
+                "Confirmação",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+                );
+
+                if (resultado == DialogResult.Yes)
+                {
+                    var clienteSQL = new ClienteSQL();
+                    clienteSQL.DeletarClientePorCPF1(TextCPF.Text);
+                    AtualizarListviewClientes();
+                }
+                LimparCamposClientes();
             }
-            LimparCamposClientes();
+            else
+            {
+                MessageBox.Show("Para excluir um cadastro, é necessário preencher o campo CPF. Caso prefira, utilize a busca.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
         }
 
         private void TextCPF_Leave(object sender, EventArgs e)
@@ -533,34 +549,70 @@ namespace TESTE_DEMARIA.FORMS
         #region CADASTRO DE PRODUTOS
         private void btn_SalvarProduto_Click_1(object sender, EventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(TextProduto.Text) ||
+            !string.IsNullOrWhiteSpace(TextQuatidade.Text) ||
+            !string.IsNullOrWhiteSpace(TextValor.Text) ||
+            !string.IsNullOrWhiteSpace(TextDescricao.Text))
 
+            {
                 if (Regex.IsMatch(TextValor.Text, @"^\d+([.,]\d+)?$"))
                 {
-                    string texto = TextValor.Text.Replace(",", ".");
-                    float valor = float.Parse(texto, System.Globalization.CultureInfo.InvariantCulture);
-                    int quantidade = Convert.ToInt32(TextQuatidade.Text.Replace(" ", ""));
-
-                var produto = new Produto
-                {
-                    Nome = TextProduto.Text,
-                    Descricao = TextDescricao.Text,
-                    Valor = valor,
-                    Estoque = quantidade,
-                };
+                    if (TextValor.Text.Contains(","))
+                    {
+                        string texto = TextValor.Text.Replace(",", ".");
+                        float valor = float.Parse(texto, System.Globalization.CultureInfo.InvariantCulture);
 
 
-                var produtoSQL = new ProdutoSQL();
-                produtoSQL.SalvarProduto1(produto);
+                        int quantidade = Convert.ToInt32(TextQuatidade.Text.Replace(" ", ""));
 
-                AtualizarListviewProdutos();
+                        var produto = new Produto
+                        {
+                            Nome = TextProduto.Text,
+                            Descricao = TextDescricao.Text,
+                            Valor = valor,
+                            Estoque = quantidade,
+                        };
+
+
+                        var produtoSQL = new ProdutoSQL();
+                        produtoSQL.SalvarProduto1(produto);
+
+                        AtualizarListviewProdutos();
+                    }
+                    else
+                    {
+                        string texto = TextValor.Text;
+                        float valor = float.Parse(texto, System.Globalization.CultureInfo.InvariantCulture);
+
+
+                        int quantidade = Convert.ToInt32(TextQuatidade.Text.Replace(" ", ""));
+
+                        var produto = new Produto
+                        {
+                            Nome = TextProduto.Text,
+                            Descricao = TextDescricao.Text,
+                            Valor = valor,
+                            Estoque = quantidade,
+                        };
+
+
+                        var produtoSQL = new ProdutoSQL();
+                        produtoSQL.SalvarProduto1(produto);
+
+                        AtualizarListviewProdutos();
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Digite apenas números com '.' ou ',' para separar decimais.", "AVISO!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-            LimparCamposProdutos();
-
+                LimparCamposProdutos();
+            }
+            else
+            {
+                MessageBox.Show("1 ou mais campos vazios.", "AVISO!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
         }
 
@@ -579,23 +631,21 @@ namespace TESTE_DEMARIA.FORMS
                     TextValor.Text = produto.Valor.ToString();
                     TextQuatidade.Text = produto.Estoque.ToString();
 
+                    if (produto.Ativo == true)
+                    {
+                        LabelStatus.Text = "STATUS DO PRODUTO: ATIVO";
+                    }
+                    else
+                    {
+                        LabelStatus.Text = "STATUS DO PRODUTO: INATIVO";
+                    }
+
                 }
                 else
                 {
                     MessageBox.Show("Produto não encontrado!");
                 }
 
-
-
-                if (produto.Ativo == true)
-                {
-                    LabelStatus.Text = "STATUS DO PRODUTO: ATIVO";
-                }
-                else
-                {
-                    LabelStatus.Text = "STATUS DO PRODUTO: INATIVO";
-                }
-                
             }
             else
             {
@@ -633,20 +683,29 @@ namespace TESTE_DEMARIA.FORMS
 
         private void btn_deletarProduto_Click(object sender, EventArgs e)
         {
-            var resultado = MessageBox.Show(
-            "Tem certeza que deseja deletar este produto?",
-            "Confirmação",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-            );
 
-            if (resultado == DialogResult.Yes)
+
+            if (!string.IsNullOrEmpty(TextProduto.Text))
             {
-                var produtoSQL = new ProdutoSQL();
-                produtoSQL.DeletarProdutoPorNome1(TextProduto.Text);
-                AtualizarListviewProdutos();
+                var resultado = MessageBox.Show(
+                "Tem certeza que deseja deletar este produto?",
+                "Confirmação",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+                );
+
+                if (resultado == DialogResult.Yes)
+                {
+                    var produtoSQL = new ProdutoSQL();
+                    produtoSQL.DeletarProdutoPorNome1(TextProduto.Text);
+                    AtualizarListviewProdutos();
+                }
+                LimparCamposProdutos();
             }
-            LimparCamposProdutos();
+            else
+            {
+                MessageBox.Show("Para excluir um produto, é necessário preencher o campo 'produto'. Caso prefira, utilize a busca.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
         #endregion
 
@@ -786,33 +845,44 @@ namespace TESTE_DEMARIA.FORMS
 
         private void btn_RetirarSelecionados_Click(object sender, EventArgs e)
         {
-                               
-            foreach (ListViewItem item in listViewPedidosEmAndamento.CheckedItems)
+
+
+            if (listViewPedidosEmAndamento.CheckedItems.Count > 0)
             {
-                string qtd = item.SubItems[2].Text;
-                string produto = item.SubItems[0].Text;
-                int quantidade = Convert.ToInt32(qtd);
-
-                var produtoSQL = new ProdutoSQL();
-                produtoSQL.RetomarEstoque1(produto, quantidade);
-
-                if (produto == textProdutoVendas.Text)
+                foreach (ListViewItem item in listViewPedidosEmAndamento.CheckedItems)
                 {
-                    produtoSQL = new ProdutoSQL();
-                    int EstoqueAtual = produtoSQL.ValidarEstoque1(textProdutoVendas.Text);
-                    textQuantidadeVendas.Text = EstoqueAtual.ToString();
-                }
+                    string qtd = item.SubItems[2].Text;
+                    string produto = item.SubItems[0].Text;
+                    int quantidade = Convert.ToInt32(qtd);
 
-                listViewPedidosEmAndamento.Items.Remove(item);
+                    var produtoSQL = new ProdutoSQL();
+                    produtoSQL.RetomarEstoque1(produto, quantidade);
+
+                    if (produto == textProdutoVendas.Text)
+                    {
+                        produtoSQL = new ProdutoSQL();
+                        int EstoqueAtual = produtoSQL.ValidarEstoque1(textProdutoVendas.Text);
+                        textQuantidadeVendas.Text = EstoqueAtual.ToString();
+                    }
+
+                    listViewPedidosEmAndamento.Items.Remove(item);
+                }
+                List<float> Valores = new List<float>();
+                foreach (ListViewItem item in listViewPedidosEmAndamento.Items)
+                {
+                    float valor = float.Parse(item.SubItems[3].Text);
+                    Valores.Add(valor);
+                }
+                float total = Valores.Sum();
+                LabelTotal.Text = "R$ " + total.ToString("F2");
+
             }
-            List<float> Valores = new List<float>();
-            foreach (ListViewItem item in listViewPedidosEmAndamento.Items)
+            else
             {
-                float valor = float.Parse(item.SubItems[3].Text);
-                Valores.Add(valor);
+                MessageBox.Show("Nenhum item foi selecionado.");
             }
-            float total = Valores.Sum();
-            LabelTotal.Text = "R$ " + total.ToString("F2");
+
+
         }
 
         private void btn_Finalizarpedido_Click(object sender, EventArgs e)
@@ -902,14 +972,18 @@ namespace TESTE_DEMARIA.FORMS
         }
         #endregion
 
-        private void TextBucarProdutoVendas_Click(object sender, EventArgs e)
+        private void TelaPrincipal_Load(object sender, EventArgs e)
         {
 
         }
 
         private void materialFloatingActionButton1_Click(object sender, EventArgs e)
         {
-
+            //ATUALIZA INFORMAÇÕES HOME
+            AtualizarTotaldeVendasHOME();
+            AtualizarTotaldeEstoqueHOME();
+            AtualizarTotaldeAtivosHOME();
+            AtualizaritemsvendidosHOME();
         }
     }
 }

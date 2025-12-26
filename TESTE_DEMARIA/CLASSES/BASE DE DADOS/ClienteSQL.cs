@@ -28,6 +28,7 @@ namespace TESTE_DEMARIA.CLASSES.BASE_DE_DADOS
             string email = cliente.Email.ToUpper();
 
             const string sqlCheck = @"SELECT ativo FROM Cadastro_de_Clientes WHERE cpf = @cpf";
+            const string sqlCheckEmail = @"SELECT ativo FROM Cadastro_de_Clientes WHERE email = @email";
             const string sqlInsert = @"
             INSERT INTO Cadastro_de_Clientes (
             nome, email, telefone, cpf,
@@ -73,97 +74,123 @@ namespace TESTE_DEMARIA.CLASSES.BASE_DE_DADOS
                 {
                     conn.Open();
 
-                    using (var checkCmd = new NpgsqlCommand(sqlCheck, conn))
-                    {
-                        checkCmd.Parameters.AddWithValue("@cpf", cliente.Cpf);
-                        var statusObj = checkCmd.ExecuteScalar();
 
-                        if (statusObj != null)
-                        {
-                            bool ativo = Convert.ToBoolean(statusObj);
 
-                            if (ativo)
-                            {
-                                var resultado = MessageBox.Show(
-                                    "Já existe um cliente com este CPF. Deseja substituir as informações?",
-                                    "Confirmação",
-                                    MessageBoxButtons.YesNo,
-                                    MessageBoxIcon.Question
-                                );
 
-                                if (resultado == DialogResult.Yes)
+                                using (var checkCmd = new NpgsqlCommand(sqlCheck, conn))
                                 {
-                                    using (var cmd = new NpgsqlCommand(sqlUpdate, conn))
-                                    {
-                                        cmd.Parameters.AddWithValue("@nome", nome);
-                                        cmd.Parameters.AddWithValue("@email", email);
-                                        cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
-                                        cmd.Parameters.AddWithValue("@cpf", cliente.Cpf);
-                                        cmd.Parameters.AddWithValue("@logradouro", cliente.Logradouro);
-                                        cmd.Parameters.AddWithValue("@numero", cliente.Numero);
-                                        cmd.Parameters.AddWithValue("@complemento", cliente.Complemento);
-                                        cmd.Parameters.AddWithValue("@bairro", cliente.Bairro);
-                                        cmd.Parameters.AddWithValue("@localidade", cliente.Localidade);
-                                        cmd.Parameters.AddWithValue("@uf", cliente.Uf);
-                                        cmd.Parameters.AddWithValue("@cep", cliente.Cep);
 
-                                        cmd.ExecuteNonQuery();
-                                        MessageBox.Show("Cliente atualizado com sucesso!");
+                                    checkCmd.Parameters.AddWithValue("@cpf", cliente.Cpf);
+                                    var statusObj = checkCmd.ExecuteScalar();
+
+                                    if (statusObj != null)
+                                    {
+                                        bool ativo = Convert.ToBoolean(statusObj);
+
+                                        if (ativo)
+                                        {
+                                            var resultado = MessageBox.Show(
+                                                "Já existe um cliente com este CPF. Deseja substituir as informações?",
+                                                "Confirmação",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question
+                                            );
+
+                                            if (resultado == DialogResult.Yes)
+                                            {
+                                                using (var cmd = new NpgsqlCommand(sqlUpdate, conn))
+                                                {
+                                                    cmd.Parameters.AddWithValue("@nome", nome);
+                                                    cmd.Parameters.AddWithValue("@email", email);
+                                                    cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
+                                                    cmd.Parameters.AddWithValue("@cpf", cliente.Cpf);
+                                                    cmd.Parameters.AddWithValue("@logradouro", cliente.Logradouro);
+                                                    cmd.Parameters.AddWithValue("@numero", cliente.Numero);
+                                                    cmd.Parameters.AddWithValue("@complemento", cliente.Complemento);
+                                                    cmd.Parameters.AddWithValue("@bairro", cliente.Bairro);
+                                                    cmd.Parameters.AddWithValue("@localidade", cliente.Localidade);
+                                                    cmd.Parameters.AddWithValue("@uf", cliente.Uf);
+                                                    cmd.Parameters.AddWithValue("@cep", cliente.Cep);
+
+                                                    cmd.ExecuteNonQuery();
+                                                    MessageBox.Show("Cliente atualizado com sucesso!");
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            var resultado = MessageBox.Show(
+                                                "Cliente existe mas está inativo. Deseja reativar?",
+                                                "Reativar Cliente",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question
+                                            );
+
+                                            if (resultado == DialogResult.Yes)
+                                            {
+                                                using (var cmd = new NpgsqlCommand(sqlReativar, conn))
+                                                {
+                                                    cmd.Parameters.AddWithValue("@nome", nome);
+                                                    cmd.Parameters.AddWithValue("@email", email);
+                                                    cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
+                                                    cmd.Parameters.AddWithValue("@cpf", cliente.Cpf);
+                                                    cmd.Parameters.AddWithValue("@logradouro", cliente.Logradouro);
+                                                    cmd.Parameters.AddWithValue("@numero", cliente.Numero);
+                                                    cmd.Parameters.AddWithValue("@complemento", cliente.Complemento);
+                                                    cmd.Parameters.AddWithValue("@bairro", cliente.Bairro);
+                                                    cmd.Parameters.AddWithValue("@localidade", cliente.Localidade);
+                                                    cmd.Parameters.AddWithValue("@uf", cliente.Uf);
+                                                    cmd.Parameters.AddWithValue("@cep", cliente.Cep);
+
+                                                    cmd.ExecuteNonQuery();
+                                                    MessageBox.Show("Cliente reativado com sucesso!");
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                            using (var checkCmdEmail = new NpgsqlCommand(sqlCheckEmail, conn))
+                                            {
+                                                checkCmdEmail.Parameters.AddWithValue("@email", email);
+                                                int count = Convert.ToInt32(checkCmdEmail.ExecuteScalar());
+
+                                                if (count > 0)
+                                                {
+                                                    // Email já existe
+                                                    MessageBox.Show("Email já cadastrado para outro usuário, favor utilizar outro!",
+                                                                    "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                                }
+                                                else
+                                                {
+                                                     using (var cmd = new NpgsqlCommand(sqlInsert, conn))
+                                                     {
+                                                        cmd.Parameters.AddWithValue("@nome", nome);
+                                                        cmd.Parameters.AddWithValue("@email", email);
+                                                        cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
+                                                        cmd.Parameters.AddWithValue("@cpf", cliente.Cpf);
+                                                        cmd.Parameters.AddWithValue("@logradouro", cliente.Logradouro);
+                                                        cmd.Parameters.AddWithValue("@numero", cliente.Numero);
+                                                        cmd.Parameters.AddWithValue("@complemento", cliente.Complemento);
+                                                        cmd.Parameters.AddWithValue("@bairro", cliente.Bairro);
+                                                        cmd.Parameters.AddWithValue("@localidade", cliente.Localidade);
+                                                        cmd.Parameters.AddWithValue("@uf", cliente.Uf);
+                                                        cmd.Parameters.AddWithValue("@cep", cliente.Cep);
+
+                                                        cmd.ExecuteNonQuery();
+                                                        MessageBox.Show("Cliente inserido com sucesso!");
+                                                     }
+                                                }
+                                            }
+
+
                                     }
                                 }
-                            }
-                            else
-                            {
-                                var resultado = MessageBox.Show(
-                                    "Cliente existe mas está inativo. Deseja reativar?",
-                                    "Reativar Cliente",
-                                    MessageBoxButtons.YesNo,
-                                    MessageBoxIcon.Question
-                                );
 
-                                if (resultado == DialogResult.Yes)
-                                {
-                                    using (var cmd = new NpgsqlCommand(sqlReativar, conn))
-                                    {
-                                        cmd.Parameters.AddWithValue("@nome", nome);
-                                        cmd.Parameters.AddWithValue("@email", email);
-                                        cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
-                                        cmd.Parameters.AddWithValue("@cpf", cliente.Cpf);
-                                        cmd.Parameters.AddWithValue("@logradouro", cliente.Logradouro);
-                                        cmd.Parameters.AddWithValue("@numero", cliente.Numero);
-                                        cmd.Parameters.AddWithValue("@complemento", cliente.Complemento);
-                                        cmd.Parameters.AddWithValue("@bairro", cliente.Bairro);
-                                        cmd.Parameters.AddWithValue("@localidade", cliente.Localidade);
-                                        cmd.Parameters.AddWithValue("@uf", cliente.Uf);
-                                        cmd.Parameters.AddWithValue("@cep", cliente.Cep);
 
-                                        cmd.ExecuteNonQuery();
-                                        MessageBox.Show("Cliente reativado com sucesso!");
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            using (var cmd = new NpgsqlCommand(sqlInsert, conn))
-                            {
-                                cmd.Parameters.AddWithValue("@nome", nome);
-                                cmd.Parameters.AddWithValue("@email", email);
-                                cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
-                                cmd.Parameters.AddWithValue("@cpf", cliente.Cpf);
-                                cmd.Parameters.AddWithValue("@logradouro", cliente.Logradouro);
-                                cmd.Parameters.AddWithValue("@numero", cliente.Numero);
-                                cmd.Parameters.AddWithValue("@complemento", cliente.Complemento);
-                                cmd.Parameters.AddWithValue("@bairro", cliente.Bairro);
-                                cmd.Parameters.AddWithValue("@localidade", cliente.Localidade);
-                                cmd.Parameters.AddWithValue("@uf", cliente.Uf);
-                                cmd.Parameters.AddWithValue("@cep", cliente.Cep);
-
-                                cmd.ExecuteNonQuery();
-                                MessageBox.Show("Cliente inserido com sucesso!");
-                            }
-                        }
-                    }
+                                  
+    
                 }
             }
             catch (Exception ex)
@@ -362,7 +389,6 @@ namespace TESTE_DEMARIA.CLASSES.BASE_DE_DADOS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao obter total de clientes ativos: " + ex.Message);
                 return 0;
             }
         }

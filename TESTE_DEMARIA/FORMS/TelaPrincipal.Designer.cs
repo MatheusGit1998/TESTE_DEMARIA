@@ -37,7 +37,6 @@
             this.campo_username = new MaterialSkin.Controls.MaterialTextBox2();
             this.campo_port = new MaterialSkin.Controls.MaterialTextBox2();
             this.campo_host = new MaterialSkin.Controls.MaterialTextBox2();
-            this.Btn_testar_conexao = new MaterialSkin.Controls.MaterialButton();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.HOME = new System.Windows.Forms.TabPage();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
@@ -159,7 +158,6 @@
             this.Btn_GerarRelatorio = new MaterialSkin.Controls.MaterialButton();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             CONEXÃO_BD = new System.Windows.Forms.TabPage();
             CONEXÃO_BD.SuspendLayout();
@@ -221,7 +219,6 @@
             CONEXÃO_BD.Controls.Add(this.campo_username);
             CONEXÃO_BD.Controls.Add(this.campo_port);
             CONEXÃO_BD.Controls.Add(this.campo_host);
-            CONEXÃO_BD.Controls.Add(this.Btn_testar_conexao);
             CONEXÃO_BD.ImageKey = "CONFIG.png";
             CONEXÃO_BD.Location = new System.Drawing.Point(4, 39);
             CONEXÃO_BD.Name = "CONEXÃO_BD";
@@ -237,14 +234,14 @@
             this.btn_salvarconfig.Depth = 0;
             this.btn_salvarconfig.HighEmphasis = true;
             this.btn_salvarconfig.Icon = null;
-            this.btn_salvarconfig.Location = new System.Drawing.Point(660, 489);
+            this.btn_salvarconfig.Location = new System.Drawing.Point(732, 487);
             this.btn_salvarconfig.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btn_salvarconfig.MouseState = MaterialSkin.MouseState.HOVER;
             this.btn_salvarconfig.Name = "btn_salvarconfig";
             this.btn_salvarconfig.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btn_salvarconfig.Size = new System.Drawing.Size(133, 36);
+            this.btn_salvarconfig.Size = new System.Drawing.Size(168, 36);
             this.btn_salvarconfig.TabIndex = 6;
-            this.btn_salvarconfig.Text = "Salvar Config";
+            this.btn_salvarconfig.Text = "SALVAR E CONECTAR";
             this.btn_salvarconfig.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btn_salvarconfig.UseAccentColor = false;
             this.btn_salvarconfig.UseVisualStyleBackColor = true;
@@ -395,26 +392,6 @@
             this.campo_host.TrailingIcon = null;
             this.campo_host.UseSystemPasswordChar = false;
             // 
-            // Btn_testar_conexao
-            // 
-            this.Btn_testar_conexao.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Btn_testar_conexao.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.Btn_testar_conexao.Depth = 0;
-            this.Btn_testar_conexao.HighEmphasis = true;
-            this.Btn_testar_conexao.Icon = null;
-            this.Btn_testar_conexao.Location = new System.Drawing.Point(838, 489);
-            this.Btn_testar_conexao.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.Btn_testar_conexao.MouseState = MaterialSkin.MouseState.HOVER;
-            this.Btn_testar_conexao.Name = "Btn_testar_conexao";
-            this.Btn_testar_conexao.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.Btn_testar_conexao.Size = new System.Drawing.Size(147, 36);
-            this.Btn_testar_conexao.TabIndex = 0;
-            this.Btn_testar_conexao.Text = "Testar conexão";
-            this.Btn_testar_conexao.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.Btn_testar_conexao.UseAccentColor = false;
-            this.Btn_testar_conexao.UseVisualStyleBackColor = true;
-            this.Btn_testar_conexao.Click += new System.EventHandler(this.Btn_testar_conexao_Click);
-            // 
             // materialTabControl1
             // 
             this.materialTabControl1.Controls.Add(this.HOME);
@@ -433,6 +410,7 @@
             this.materialTabControl1.SelectedIndex = 0;
             this.materialTabControl1.Size = new System.Drawing.Size(1595, 770);
             this.materialTabControl1.TabIndex = 0;
+            this.materialTabControl1.TabStop = false;
             // 
             // HOME
             // 
@@ -793,12 +771,12 @@
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel5.Location = new System.Drawing.Point(175, 28);
+            this.materialLabel5.Location = new System.Drawing.Point(140, 28);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(63, 19);
+            this.materialLabel5.Size = new System.Drawing.Size(151, 19);
             this.materialLabel5.TabIndex = 0;
-            this.materialLabel5.Text = "EXCLUIR";
+            this.materialLabel5.Text = "DESATIVAR CLIENTE";
             // 
             // materialCard17
             // 
@@ -819,12 +797,12 @@
             this.materialLabel6.AutoSize = true;
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel6.Location = new System.Drawing.Point(175, 27);
+            this.materialLabel6.Location = new System.Drawing.Point(104, 27);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(60, 19);
+            this.materialLabel6.Size = new System.Drawing.Size(206, 19);
             this.materialLabel6.TabIndex = 1;
-            this.materialLabel6.Text = "SALVAR";
+            this.materialLabel6.Text = "SALVAR/REATIVAR CLIENTE";
             // 
             // materialCard18
             // 
@@ -1474,12 +1452,12 @@
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(145, 28);
+            this.materialLabel2.Location = new System.Drawing.Point(103, 28);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(63, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(162, 19);
             this.materialLabel2.TabIndex = 0;
-            this.materialLabel2.Text = "EXCLUIR";
+            this.materialLabel2.Text = "DESATIVAR PRODUTO";
             // 
             // materialCard14
             // 
@@ -1500,12 +1478,12 @@
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(145, 27);
+            this.materialLabel3.Location = new System.Drawing.Point(79, 27);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(60, 19);
+            this.materialLabel3.Size = new System.Drawing.Size(217, 19);
             this.materialLabel3.TabIndex = 1;
-            this.materialLabel3.Text = "SALVAR";
+            this.materialLabel3.Text = "SALVAR/REATIVAR PRODUTO";
             // 
             // materialCard13
             // 
@@ -1791,6 +1769,7 @@
             this.listViewVendas.Name = "listViewVendas";
             this.listViewVendas.Size = new System.Drawing.Size(561, 254);
             this.listViewVendas.TabIndex = 18;
+            this.listViewVendas.TabStop = false;
             this.listViewVendas.UseCompatibleStateImageBehavior = false;
             // 
             // materialCard22
@@ -1825,6 +1804,7 @@
             this.listViewPedidosEmAndamento.Name = "listViewPedidosEmAndamento";
             this.listViewPedidosEmAndamento.Size = new System.Drawing.Size(820, 254);
             this.listViewPedidosEmAndamento.TabIndex = 17;
+            this.listViewPedidosEmAndamento.TabStop = false;
             this.listViewPedidosEmAndamento.UseCompatibleStateImageBehavior = false;
             // 
             // materialCard21
@@ -1864,6 +1844,7 @@
             this.btn_Finalizarpedido.Name = "btn_Finalizarpedido";
             this.btn_Finalizarpedido.Size = new System.Drawing.Size(56, 56);
             this.btn_Finalizarpedido.TabIndex = 16;
+            this.btn_Finalizarpedido.TabStop = false;
             this.btn_Finalizarpedido.Text = "materialFloatingActionButton9";
             this.btn_Finalizarpedido.UseVisualStyleBackColor = true;
             this.btn_Finalizarpedido.Click += new System.EventHandler(this.btn_Finalizarpedido_Click);
@@ -1877,6 +1858,7 @@
             this.btn_novopedido.Name = "btn_novopedido";
             this.btn_novopedido.Size = new System.Drawing.Size(56, 56);
             this.btn_novopedido.TabIndex = 15;
+            this.btn_novopedido.TabStop = false;
             this.btn_novopedido.Text = "materialFloatingActionButton11";
             this.btn_novopedido.UseVisualStyleBackColor = true;
             this.btn_novopedido.Click += new System.EventHandler(this.btn_novopedido_Click);
@@ -1985,8 +1967,9 @@
             this.textProdutoVendas.SelectionLength = 0;
             this.textProdutoVendas.SelectionStart = 0;
             this.textProdutoVendas.ShortcutsEnabled = true;
-            this.textProdutoVendas.Size = new System.Drawing.Size(377, 48);
-            this.textProdutoVendas.TabIndex = 2;
+            this.textProdutoVendas.ShowAssistiveText = true;
+            this.textProdutoVendas.Size = new System.Drawing.Size(377, 64);
+            this.textProdutoVendas.TabIndex = 4;
             this.textProdutoVendas.TabStop = false;
             this.textProdutoVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textProdutoVendas.TrailingIcon = null;
@@ -2001,6 +1984,7 @@
             this.btn_RetirarSelecionados.Name = "btn_RetirarSelecionados";
             this.btn_RetirarSelecionados.Size = new System.Drawing.Size(56, 56);
             this.btn_RetirarSelecionados.TabIndex = 20;
+            this.btn_RetirarSelecionados.TabStop = false;
             this.btn_RetirarSelecionados.Text = "materialFloatingActionButton14";
             this.btn_RetirarSelecionados.UseVisualStyleBackColor = true;
             this.btn_RetirarSelecionados.Click += new System.EventHandler(this.btn_RetirarSelecionados_Click);
@@ -2054,8 +2038,9 @@
             this.textCPFVendas.SelectionLength = 0;
             this.textCPFVendas.SelectionStart = 0;
             this.textCPFVendas.ShortcutsEnabled = true;
-            this.textCPFVendas.Size = new System.Drawing.Size(160, 48);
-            this.textCPFVendas.TabIndex = 6;
+            this.textCPFVendas.ShowAssistiveText = true;
+            this.textCPFVendas.Size = new System.Drawing.Size(160, 64);
+            this.textCPFVendas.TabIndex = 8;
             this.textCPFVendas.TabStop = false;
             this.textCPFVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textCPFVendas.TrailingIcon = null;
@@ -2084,8 +2069,9 @@
             this.textValorVendas.SelectionLength = 0;
             this.textValorVendas.SelectionStart = 0;
             this.textValorVendas.ShortcutsEnabled = true;
-            this.textValorVendas.Size = new System.Drawing.Size(232, 48);
-            this.textValorVendas.TabIndex = 4;
+            this.textValorVendas.ShowAssistiveText = true;
+            this.textValorVendas.Size = new System.Drawing.Size(232, 64);
+            this.textValorVendas.TabIndex = 6;
             this.textValorVendas.TabStop = false;
             this.textValorVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textValorVendas.TrailingIcon = null;
@@ -2135,6 +2121,7 @@
             this.btn_adicionarPedido.Name = "btn_adicionarPedido";
             this.btn_adicionarPedido.Size = new System.Drawing.Size(56, 56);
             this.btn_adicionarPedido.TabIndex = 19;
+            this.btn_adicionarPedido.TabStop = false;
             this.btn_adicionarPedido.Text = "materialFloatingActionButton14";
             this.btn_adicionarPedido.UseVisualStyleBackColor = true;
             this.btn_adicionarPedido.Click += new System.EventHandler(this.btn_adicionarPedido_Click);
@@ -2188,8 +2175,9 @@
             this.textNomeClienteVendas.SelectionLength = 0;
             this.textNomeClienteVendas.SelectionStart = 0;
             this.textNomeClienteVendas.ShortcutsEnabled = true;
-            this.textNomeClienteVendas.Size = new System.Drawing.Size(302, 48);
-            this.textNomeClienteVendas.TabIndex = 5;
+            this.textNomeClienteVendas.ShowAssistiveText = true;
+            this.textNomeClienteVendas.Size = new System.Drawing.Size(302, 64);
+            this.textNomeClienteVendas.TabIndex = 7;
             this.textNomeClienteVendas.TabStop = false;
             this.textNomeClienteVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textNomeClienteVendas.TrailingIcon = null;
@@ -2218,8 +2206,9 @@
             this.textQuantidadeVendas.SelectionLength = 0;
             this.textQuantidadeVendas.SelectionStart = 0;
             this.textQuantidadeVendas.ShortcutsEnabled = true;
-            this.textQuantidadeVendas.Size = new System.Drawing.Size(124, 48);
-            this.textQuantidadeVendas.TabIndex = 3;
+            this.textQuantidadeVendas.ShowAssistiveText = true;
+            this.textQuantidadeVendas.Size = new System.Drawing.Size(124, 64);
+            this.textQuantidadeVendas.TabIndex = 5;
             this.textQuantidadeVendas.TabStop = false;
             this.textQuantidadeVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textQuantidadeVendas.TrailingIcon = null;
@@ -2234,6 +2223,7 @@
             this.btn_buscaClienteVenda.Name = "btn_buscaClienteVenda";
             this.btn_buscaClienteVenda.Size = new System.Drawing.Size(56, 56);
             this.btn_buscaClienteVenda.TabIndex = 26;
+            this.btn_buscaClienteVenda.TabStop = false;
             this.btn_buscaClienteVenda.Text = "materialFloatingActionButton13";
             this.btn_buscaClienteVenda.UseVisualStyleBackColor = true;
             this.btn_buscaClienteVenda.Click += new System.EventHandler(this.btn_buscaClienteVenda_Click);
@@ -2286,7 +2276,7 @@
             this.TextBucarClienteVendas.ShortcutsEnabled = true;
             this.TextBucarClienteVendas.Size = new System.Drawing.Size(298, 48);
             this.TextBucarClienteVendas.SkipLiterals = true;
-            this.TextBucarClienteVendas.TabIndex = 2;
+            this.TextBucarClienteVendas.TabIndex = 0;
             this.TextBucarClienteVendas.TabStop = false;
             this.TextBucarClienteVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextBucarClienteVendas.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
@@ -2300,7 +2290,7 @@
             this.NumericoQuantidadeDesejada.Location = new System.Drawing.Point(681, 165);
             this.NumericoQuantidadeDesejada.Name = "NumericoQuantidadeDesejada";
             this.NumericoQuantidadeDesejada.Size = new System.Drawing.Size(128, 47);
-            this.NumericoQuantidadeDesejada.TabIndex = 7;
+            this.NumericoQuantidadeDesejada.TabIndex = 3;
             // 
             // btn_buscaProdutoVenda
             // 
@@ -2311,6 +2301,7 @@
             this.btn_buscaProdutoVenda.Name = "btn_buscaProdutoVenda";
             this.btn_buscaProdutoVenda.Size = new System.Drawing.Size(56, 56);
             this.btn_buscaProdutoVenda.TabIndex = 25;
+            this.btn_buscaProdutoVenda.TabStop = false;
             this.btn_buscaProdutoVenda.Text = "materialFloatingActionButton12";
             this.btn_buscaProdutoVenda.UseVisualStyleBackColor = true;
             this.btn_buscaProdutoVenda.Click += new System.EventHandler(this.btn_buscaProdutoVenda_Click);
@@ -2353,12 +2344,11 @@
             this.TextBucarProdutoVendas.SelectionStart = 0;
             this.TextBucarProdutoVendas.ShortcutsEnabled = true;
             this.TextBucarProdutoVendas.Size = new System.Drawing.Size(297, 48);
-            this.TextBucarProdutoVendas.TabIndex = 0;
+            this.TextBucarProdutoVendas.TabIndex = 1;
             this.TextBucarProdutoVendas.TabStop = false;
             this.TextBucarProdutoVendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.TextBucarProdutoVendas.TrailingIcon = null;
             this.TextBucarProdutoVendas.UseSystemPasswordChar = false;
-            this.TextBucarProdutoVendas.Click += new System.EventHandler(this.TextBucarProdutoVendas_Click);
             // 
             // RELATÓRIOS
             // 
@@ -2471,21 +2461,12 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "RELATORIOS.png");
-            this.imageList1.Images.SetKeyName(1, "VENDAS.png");
-            this.imageList1.Images.SetKeyName(2, "HOME.png");
-            this.imageList1.Images.SetKeyName(3, "CLIENTES.png");
-            this.imageList1.Images.SetKeyName(4, "PRODUTOS.png");
-            this.imageList1.Images.SetKeyName(5, "CONFIG.png");
-            // 
-            // imageList2
-            // 
-            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
-            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList2.Images.SetKeyName(0, "BUSCAR.png");
-            this.imageList2.Images.SetKeyName(1, "SALVAR.png");
-            this.imageList2.Images.SetKeyName(2, "EXCLUIR.png");
-            this.imageList2.Images.SetKeyName(3, "NOVO.png");
+            this.imageList1.Images.SetKeyName(0, "CONFIG.png");
+            this.imageList1.Images.SetKeyName(1, "PRODUTOS.png");
+            this.imageList1.Images.SetKeyName(2, "CLIENTES.png");
+            this.imageList1.Images.SetKeyName(3, "RELATORIOS.png");
+            this.imageList1.Images.SetKeyName(4, "VENDAS.png");
+            this.imageList1.Images.SetKeyName(5, "HOME.png");
             // 
             // reportViewer1
             // 
@@ -2494,6 +2475,7 @@
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(396, 246);
             this.reportViewer1.TabIndex = 0;
+            this.reportViewer1.TabStop = false;
             // 
             // TelaPrincipal
             // 
@@ -2506,6 +2488,7 @@
             this.Name = "TelaPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EMPRESA X - ANALYTICS";
+            this.Load += new System.EventHandler(this.TelaPrincipal_Load);
             CONEXÃO_BD.ResumeLayout(false);
             CONEXÃO_BD.PerformLayout();
             this.materialTabControl1.ResumeLayout(false);
@@ -2641,7 +2624,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel7;
         private MaterialSkin.Controls.MaterialCard materialCard19;
         private MaterialSkin.Controls.MaterialTextBox2 TextBuscaProduto;
-        private System.Windows.Forms.ImageList imageList2;
         private MaterialSkin.Controls.MaterialCard materialCard22;
         private MaterialSkin.Controls.MaterialCard materialCard21;
         private MaterialSkin.Controls.MaterialCard materialCard20;
@@ -2690,7 +2672,6 @@
         public MaterialSkin.Controls.MaterialTextBox2 campo_username;
         public MaterialSkin.Controls.MaterialTextBox2 campo_port;
         public MaterialSkin.Controls.MaterialTextBox2 campo_host;
-        private MaterialSkin.Controls.MaterialButton Btn_testar_conexao;
         private MaterialSkin.Controls.MaterialButton btn_salvarconfig;
         private MaterialSkin.Controls.MaterialMaskedTextBox TextNum;
         private MaterialSkin.Controls.MaterialMaskedTextBox TextTelefone;
