@@ -7,14 +7,17 @@ Teste Prático DeMaria
 
 🗄️ Banco de Dados
 - Todos os scripts de criação de banco, tabelas, views e usuários de acesso estão na pasta Scripts.
-- O diagrama do banco de dados está disponível na documentação do proje
+- Diagrama do banco de dados:
+  <img width="1079" height="622" alt="image" src="https://github.com/user-attachments/assets/da8f30e2-d70c-4c0a-a331-839e2043e313" />
+
 
 📂 Estrutura de Pastas
 - Classes → Armazena os objetos principais.
-  - Base de Dasos → Lógica de conexão e comunicação com o banco.
+  - BASE DE DADOS → Lógica de conexão e comunicação com o banco.
   - Utils → Classes auxiliares (validação CPF, preenchimento CEP...).
+  - OBJETOS → Classes que representam os dados do negócio (Cliente, Produto e Venda).
 - Forms → Todos os formulários do projeto.
-- Relatórios → Arquivos base para relatórios do Report Reviewer.
+- Relatórios → Arquivos base para relatórios do Report Viewer.
 - Scripts → Scripts SQL de criação de banco, tabelas, usuários e views.
 
 🖥️ Visão geral das telas
@@ -36,7 +39,8 @@ Funcionalidades:
 - Pesquisa de CEP via API para preenchimento rápido de endereço.
 - Preview da lista de cadastros com atualização automatica a cada inclusão.
 
-  <img width="1587" height="829" alt="image" src="https://github.com/user-attachments/assets/2a5e5041-4eba-4768-9706-ffb013c14516" />
+<img width="1599" height="833" alt="image" src="https://github.com/user-attachments/assets/96e36a7b-af7f-49e5-8ed3-7f7d3ddf955d" />
+
 
 
 Tela de Cadastro de Produtos
@@ -45,7 +49,8 @@ Funcionalidades:
 - Busca de produto por nome.
 - Preview da lista de cadastros com atualização automatica a cada inclusão.
 
-  <img width="1599" height="836" alt="image" src="https://github.com/user-attachments/assets/7c82fbba-881e-445b-9864-86f1cd88b633" />
+<img width="1599" height="838" alt="image" src="https://github.com/user-attachments/assets/640d205c-6d95-4137-8982-2602ca340185" />
+
 
 Tela de Vendas
 Funcionalidades:
@@ -54,7 +59,7 @@ Funcionalidades:
 - Resumo do pedido (valor total,detalhes e estoque do item selecionado) atualizado dinamicamente.
 - Atualização automática do estoque ao finalizar a venda.
 
-  <img width="1602" height="834" alt="image" src="https://github.com/user-attachments/assets/ece5c0d4-6493-4d37-aaa9-cc21fa458702" />
+<img width="1602" height="834" alt="image" src="https://github.com/user-attachments/assets/ece5c0d4-6493-4d37-aaa9-cc21fa458702" />
 
 Tela de Relatórios
 Funcionalidades:
@@ -62,7 +67,7 @@ Funcionalidades:
 - Relatórios de clientes cadastrados.
 - Relatórios de vendas realizadas por período.
 
-  <img width="1601" height="836" alt="image" src="https://github.com/user-attachments/assets/4e6b1c48-b82c-4912-bb2b-19b0f1b19f16" />
+<img width="1601" height="836" alt="image" src="https://github.com/user-attachments/assets/4e6b1c48-b82c-4912-bb2b-19b0f1b19f16" />
 
 Tela de Configuração do banco de dados
 Funcionalidades:
